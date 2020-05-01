@@ -2,6 +2,9 @@ import React from 'react';
 import { Paper, withStyles, Grid, TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+
+import { Redirect } from "react-router-dom";
+
 const styles = theme => ({
     margin: {
         margin: theme.spacing.unit * 2,
@@ -12,7 +15,16 @@ const styles = theme => ({
 });
 
 class LoginTab extends React.Component {
+    state = { redirect: null };
+
+    async fakeAuth(){
+      await sessionStorage.setItem("auth", true);
+    }
+
     render() {
+        if (this.state.redirect) {
+          return <Redirect to={this.state.redirect} />
+        }
         const { classes } = this.props;
         return (
           <Grid
@@ -54,7 +66,11 @@ class LoginTab extends React.Component {
                         </Grid>
                     </Grid>
                     <Grid container justify="center" style={{ marginTop: '10px' }}>
-                        <Button variant="outlined" color="primary" style={{ textTransform: "none" }}>Login</Button>
+                        <Button variant="outlined" color="primary" style={{ textTransform: "none" }} 
+                          onClick={() => {
+                            this.fakeAuth()
+                            this.setState({redirect: 'admin'})
+                          }}>Login</Button>
                     </Grid>
                 </div>
             </Paper>
