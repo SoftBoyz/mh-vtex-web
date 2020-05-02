@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 
 App2.js
+
+package-lock.json
