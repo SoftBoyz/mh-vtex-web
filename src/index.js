@@ -30,15 +30,6 @@ import "assets/css/material-dashboard-react.css?v=1.8.0";
 
 const hist = createBrowserHistory();
 
-import Recover from './components/Recover';
-import Login from './components/Login';
-import Register from './components/Register';
-
-import User from './components/User';
-
-
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 
 ReactDOM.render(
   <UserProvider>
@@ -53,6 +44,17 @@ ReactDOM.render(
   </UserProvider>,
   document.getElementById("root")
 );
+
+
+// import Recover from './components/Recover';
+// import Login from './components/Login';
+// import Register from './components/Register';
+
+// import User from './components/User';
+
+
+// import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 
 // ReactDOM.render(
 //   <Router>
