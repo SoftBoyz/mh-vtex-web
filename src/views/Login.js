@@ -53,7 +53,7 @@ class LoginTab extends React.Component {
                             <TextField id="username" label="Password" type="password" fullWidth required />
                         </Grid>
                     </Grid>
-                    <Grid container alignItems="center" justify="space-between">
+                    <Grid container spacing={8} alignItems="center" justify="space-between">
                         <Grid item>
                             <FormControlLabel control={
                                 <Checkbox

@@ -32,6 +32,8 @@ import Typography from "views/Typography/Typography.js";
 import Icons from "views/Icons/Icons.js";
 import Maps from "views/Maps/Maps.js";
 import NotificationsPage from "views/Notifications/Notifications.js";
+import Seller from "views/Seller/Seller";
+import DropOff from "views/DropOff/DropOff";
 import UpgradeToPro from "views/UpgradeToPro/UpgradeToPro.js";
 import Teste from "views/Teste";
 // core components/views for RTL layout
@@ -47,19 +49,19 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/vendas",
+    path: "/seller",
     name: "Vendedor",
     rtlName: "ملف تعريفي للمستخدم",
     icon: Person,
-    component: Teste,
+    component: Seller,
     layout: "/admin"
   },
   {
-    path: "/entregas",
+    path: "/drop-off",
     name: "Ponto de entrega",
     rtlName: "ملف تعريفي للمستخدم",
     icon: Person,
-    component: Teste,
+    component: DropOff,
     layout: "/admin"
   },
   {
