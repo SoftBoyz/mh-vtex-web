@@ -31,6 +31,12 @@ import "assets/css/material-dashboard-react.css?v=1.8.0";
 const hist = createBrowserHistory();
 
 
+// import Recover from './components/Recover';
+// import Login from './components/Login';
+// import Register from './components/Register';
+
+// import User from './components/User';
+
 ReactDOM.render(
   <UserProvider>
     <Router history={hist}>
@@ -38,6 +44,36 @@ ReactDOM.render(
         <Route path="/admin" component={Admin} />
         <Route path="/login" component={LoginTab} />
         <Route path="/rtl" component={RTL} />
+
+        {/* <Route exact path='/' component={App} /> */}
+        {/* <Route path='/register' component={Register} /> */}
+        {/* <Route path='/login' component={Login} /> */}
+        {/* <Route path='/recover' component={Recover} /> */}
+
+        {/* <Route path='/user/:id' component={User} /> */}
+        {/* <Route path='/user/:id/config' component={} /> */}
+
+        {/* <Route path='/user/:id/orders' component={} />  */}
+        {/* <Route path='/user/:id/orders/history' component={} /> */}
+        {/* <Route path='/user/:id/order/:order-id' component={} /> */}
+
+        {/* <Route path='/user/:id/products' component={} /> */}
+        {/* <Route path='/user/:id/product/new' component={} /> */}
+        {/* <Route path='/user/:id/product/:product-id' component={} /> */}
+        {/* <Route path='/user/:id/product/:product-id/edit' component={} /> */}
+
+        {/* <Route path='/user/:id/deli_partners' component={} /> */}
+        {/* <Route path='/user/:id/deli_partner/:partner-id' component={} /> */}
+        {/* <Route path='/user/:id/deli_partner/:partner-id/edit' component={} /> */}
+
+        {/* <Route path='/user/:id/be-a-partner' component={} /> */}
+        {/* <Route path='/user/:id/requests' component={} /> */}
+        {/* <Route path='/user/:id/request/:req-id' component={} /> */}
+
+        {/* <Route path='/user/:id/store-partners' component={} /> */}
+        {/* <Route path='/user/:id/store-partner/:store-id' component={} /> */}
+        {/* <Route path='/user/:id/store-partner/:store-id/edit' component={} /> */}
+        
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </Router>
@@ -46,49 +82,3 @@ ReactDOM.render(
 );
 
 
-// import Recover from './components/Recover';
-// import Login from './components/Login';
-// import Register from './components/Register';
-
-// import User from './components/User';
-
-
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
-
-
-// ReactDOM.render(
-//   <Router>
-//       <div>
-//         <Route exact path='/' component={App} />
-//         <Route path='/register' component={Register} />
-//         <Route path='/login' component={Login} />
-//         <Route path='/recover' component={Recover} />
-
-//         <Route path='/user/:id' component={User} />
-//         {/* <Route path='/user/:id/config' component={} /> */}
-
-//         {/* <Route path='/user/:id/orders' component={} /> */}
-//         {/* <Route path='/user/:id/orders/history' component={} /> */}
-//         {/* <Route path='/user/:id/order/:order-id' component={} /> */}
-
-//         {/* <Route path='/user/:id/products' component={} /> */}
-//         {/* <Route path='/user/:id/product/new' component={} /> */}
-//         {/* <Route path='/user/:id/product/:product-id' component={} /> */}
-//         {/* <Route path='/user/:id/product/:product-id/edit' component={} /> */}
-
-//         {/* <Route path='/user/:id/deli_partners' component={} /> */}
-//         {/* <Route path='/user/:id/deli_partner/:partner-id' component={} /> */}
-//         {/* <Route path='/user/:id/deli_partner/:partner-id/edit' component={} /> */}
-
-//         {/* <Route path='/user/:id/be-a-partner' component={} /> */}
-//         {/* <Route path='/user/:id/requests' component={} /> */}
-//         {/* <Route path='/user/:id/request/:req-id' component={} /> */}
-
-//         {/* <Route path='/user/:id/store-partners' component={} /> */}
-//         {/* <Route path='/user/:id/store-partner/:store-id' component={} /> */}
-//         {/* <Route path='/user/:id/store-partner/:store-id/edit' component={} /> */}
-//       </div>
-//   </Router>,
-
-//   document.getElementById('root')
-// );
