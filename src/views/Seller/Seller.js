@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
+import Maps from "../Maps/Maps";
+
 import {pedidos} from 'components/User.js';
 import OrderLists from 'components/user/OrderList';
 
@@ -165,7 +167,7 @@ export default function SellerTabs() {
         <TableTwo />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <TableThree />
+        <Maps />
       </TabPanel>
     </Paper>
   );
