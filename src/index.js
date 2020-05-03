@@ -1,45 +1,12 @@
-<<<<<<< HEAD
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import Register from "./components/Register";
-import Login from "./components/Login";
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-
-ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/" exact={true} component={App} />
-      <Route path="/register" component={Register} />
-      <Route path="/login" component={Login} />
-    </Switch>
-  </BrowserRouter>,
-=======
-/*!
-
-=========================================================
-* Material Dashboard React - v1.8.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 // core components
+import App from "./App";
+import Register from "./components/Register";
+import Login from "./components/Login";
 import Admin from "layouts/Admin.js";
 import RTL from "layouts/RTL.js";
 import LoginTab from "views/Login";
@@ -50,19 +17,17 @@ import "assets/css/material-dashboard-react.css?v=1.8.0";
 const hist = createBrowserHistory();
 
 
-// import Recover from './components/Recover';
-// import Login from './components/Login';
-// import Register from './components/Register';
-
-// import User from './components/User';
-
 ReactDOM.render(
   <UserProvider>
     <Router history={hist}>
       <Switch>
         <Route path="/admin" component={Admin} />
-        <Route path="/login" component={LoginTab} />
+        {/* <Route path="/login" component={LoginTab} /> */}
         <Route path="/rtl" component={RTL} />
+
+        <Route path="/" exact={true} component={App} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
 
         {/* <Route exact path='/' component={App} /> */}
         {/* <Route path='/register' component={Register} /> */}
@@ -97,8 +62,5 @@ ReactDOM.render(
       </Switch>
     </Router>
   </UserProvider>,
->>>>>>> telas
   document.getElementById("root")
 );
-
-
