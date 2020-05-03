@@ -14,6 +14,9 @@ import Typography from '@material-ui/core/Typography';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 
+import {pedidos} from 'components/User.js';
+import OrderLists from 'components/user/OrderList';
+
 const styles = {
   cardCategoryWhite: {
     "&,& a,& a:hover,& a:focus": {
@@ -83,6 +86,10 @@ function a11yProps(index) {
 const useStyles = makeStyles(styles);
 
 function TableOne() {
+  return <OrderLists orders={pedidos} />;
+}
+
+function TableTwo() {
   const classes = useStyles();
   return (
     <GridContainer>
@@ -91,26 +98,12 @@ function TableOne() {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["ID", "Name", "Country", "City", "Salary"]}
+              tableHead={["ID", "Nome", "Preço","Estoque", "Peso/Volume"]}
               tableData={[
-                ["1", "Dakota Rice", "$36,738", "Niger", "Oud-Turnhout"],
-                ["2", "Minerva Hooper", "$23,789", "Curaçao", "Sinaai-Waas"],
-                ["3", "Sage Rodriguez", "$56,142", "Netherlands", "Baileux"],
-                [
-                  "4",
-                  "Philip Chaney",
-                  "$38,735",
-                  "Korea, South",
-                  "Overland Park"
-                ],
-                [
-                  "5",
-                  "Doris Greene",
-                  "$63,542",
-                  "Malawi",
-                  "Feldkirchen in Kärnten"
-                ],
-                ["6", "Mason Porter", "$78,615", "Chile", "Gloucester"]
+                ["1", "Maçã", "R$3,70", "123", "1kg"],
+                ["2", "Banana", "R$2,20", "123", "1kg"],
+                ["3", "Chocolate", "R$6,50", "123", "300g"],
+                ["4", "Suco", "R$2,99", "123", "1L"],
               ]}
             />
           </CardBody>
@@ -119,6 +112,31 @@ function TableOne() {
     </GridContainer>
   );
 }
+
+function TableThree() {
+  const classes = useStyles();
+  return (
+    <GridContainer>
+      <GridItem xs={12} sm={12} md={12}>
+        <Card plain className={classes.gridContainer}>
+          <CardBody>
+            <Table
+              tableHeaderColor="primary"
+              tableHead={["ID", "Nome"]}
+              tableData={[
+                ["1", "Teste"],
+                ["2", "Teste1"],
+                ["3", "Teste2"],
+                ["4", "Teste3"],
+              ]}
+            />
+          </CardBody>
+        </Card>
+      </GridItem>
+    </GridContainer>
+  );
+}
+
 
 export default function SellerTabs() {
   const [value, setValue] = React.useState(0);
@@ -144,10 +162,10 @@ export default function SellerTabs() {
         <TableOne />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        teste
+        <TableTwo />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        teste
+        <TableThree />
       </TabPanel>
     </Paper>
   );
