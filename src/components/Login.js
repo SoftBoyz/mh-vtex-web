@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import "./Register.css";
 import { TextField, Card, CardContent, Button } from "@material-ui/core";
 import { fbAuth } from "../services/firebase.conf";
 
@@ -14,6 +14,7 @@ class Login extends React.Component {
     };
     this.handlechange = this.handlechange.bind(this);
     this.loginAttempt = this.loginAttempt.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   loginAttempt(e) {
@@ -25,7 +26,6 @@ class Login extends React.Component {
       .signInWithEmailAndPassword(data.email, data.password)
       .then((e) => {
         erro = false;
-        console.log("hi lorena");
       })
       .catch((e) => {
         data.error.email = true;
@@ -45,12 +45,20 @@ class Login extends React.Component {
     this.setState({ [e.target.id]: data });
   }
 
+  cancel(e) {
+    window.location.replace("/");
+  }
+
   render() {
     const { email, password, error } = this.state;
     return (
       <div>
-        <Card className="form">
-          <CardContent>
+        <div className="logo">
+          <span className="name">s-Mart</span>
+        </div>
+        <div className="background"></div>
+
+        <div className="form">
             <form noValidate autoComplete="off">
               <div>
                 <TextField
@@ -78,11 +86,15 @@ class Login extends React.Component {
               </div>
             </form>
 
-            <Button className="button" size="small" onClick={this.loginAttempt}>
-              Entrar
-            </Button>
-          </CardContent>
-        </Card>
+            <div className="buttons">
+                <Button className="button" variant="outlined" size="small" color="primary" onClick={this.cancel}>
+                  Cancelar
+                </Button>
+                <Button className="button" variant="contained" size="small" color="primary" onClick={this.loginAttempt}>
+                  Entrar
+                </Button>
+              </div>
+        </div>
       </div>
     );
   }

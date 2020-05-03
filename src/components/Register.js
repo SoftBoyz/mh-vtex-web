@@ -1,6 +1,6 @@
 import React from "react";
-import "../App.css";
-import { TextField, Card, CardContent, Button } from "@material-ui/core";
+import "./Register.css";
+import { TextField, Button, CircularProgress } from "@material-ui/core";
 import { fbDatabase, fbAuth } from "../services/firebase.conf";
 import * as mask from "../mask";
 
@@ -20,12 +20,14 @@ class Register extends React.Component {
       password: "",
       conf_password: "",
       error: {},
+      loading: false
     };
     this.handlechange = this.handlechange.bind(this);
     this.createStore = this.createStore.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
-  createStore(e) {
+  async createStore(e) {
     let data = this.state;
     data.error = {};
     let erro = true;
@@ -40,7 +42,7 @@ class Register extends React.Component {
       data.error.phone = true;
     } else if (data.password !== data.conf_password) {
       data.error.password = true;
-      data.error.conf_password = "As senhas são diferentes";
+      data.error.conf_password = "As duas senhas precisam ser iguais";
     } else if (data.password.length < 6) {
       data.error.password = true;
       data.error.conf_password = "A senha precisa ter no mínimo 6 caracteres";
@@ -61,12 +63,21 @@ class Register extends React.Component {
       return;
     }
 
-    fbAuth
+    await fbAuth
       .createUserWithEmailAndPassword(data.email, data.password)
+      .then((e) => {
+        this.setState({ loading: true });
+      })
       .catch((e) => {
+        erro = true
         data.error.email = true;
+      })
+      .finally(() => {
+        this.setState({ loading: false });
       });
 
+    if (erro) return;
+    
     data = JSON.parse(JSON.stringify(this.state));
 
     delete data.cnpj;
@@ -74,6 +85,7 @@ class Register extends React.Component {
     delete data.email;
     delete data.password;
     delete data.conf_password;
+    delete data.loading;
 
     const cnpj = this.state.cnpj.replace(/\D/g, "");
 
@@ -97,6 +109,10 @@ class Register extends React.Component {
     }
   }
 
+  cancel(e) {
+    window.location.replace("/");
+  }
+
   render() {
     const {
       cnpj,
@@ -110,12 +126,17 @@ class Register extends React.Component {
       password,
       conf_password,
       error,
+      loading
     } = this.state;
     return (
       <div>
-        <Card className="form">
-          <CardContent>
-            <form noValidate autoComplete="off">
+        <div className="logo">
+          <span className="name">s-Mart</span>
+        </div>
+        <div className="background"></div>
+
+        <div className="form">
+            <form>
               <div>
                 <TextField
                   label="CNPJ"
@@ -123,6 +144,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={cnpj}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.cnpj}
                   required
                 />
@@ -134,6 +156,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={name}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.name}
                   required
                 />
@@ -145,6 +168,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={cep}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.cep}
                   required
                 />
@@ -156,6 +180,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={address}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.address}
                   required
                 />
@@ -167,6 +192,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={number}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.number}
                   required
                 />
@@ -178,6 +204,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={complement}
                   onChange={this.handlechange}
+                  disabled={loading}
                 />
               </div>
               <div>
@@ -188,6 +215,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={email}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.email}
                   required
                 />
@@ -199,6 +227,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={phone}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.phone}
                   required
                 />
@@ -211,6 +240,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={password}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.password}
                   helperText={error.conf_password}
                   required
@@ -224,6 +254,7 @@ class Register extends React.Component {
                   margin="normal"
                   value={conf_password}
                   onChange={this.handlechange}
+                  disabled={loading}
                   error={error.password}
                   helperText={error.conf_password}
                   required
@@ -231,11 +262,20 @@ class Register extends React.Component {
               </div>
             </form>
 
-            <Button className="button" size="small" onClick={this.createStore}>
-              Cadastrar
-            </Button>
-          </CardContent>
-        </Card>
+            {loading ?
+              <CircularProgress/>
+            :
+              <div className="buttons">
+                <Button className="button" variant="outlined" size="small" color="primary" onClick={this.cancel}>
+                  Cancelar
+                </Button>
+                <Button className="button" variant="contained" size="small" color="primary" onClick={this.createStore}>
+                  Cadastrar
+                </Button>
+              </div>
+              
+            }
+        </div>
       </div>
     );
   }
