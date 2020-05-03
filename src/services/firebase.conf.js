@@ -1,4 +1,8 @@
+
 import firebase from 'firebase'
+import "firebase/auth";
+import "firebase/firestore";
+
 var firebaseConfig = {
     apiKey: "AIzaSyDKJ0dmRDxXVc-zUHd8XPHZ-zbFMK0dSk8",
     authDomain: "mega-hack-vtex.firebaseapp.com",
