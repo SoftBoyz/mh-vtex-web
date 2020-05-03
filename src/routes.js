@@ -26,6 +26,8 @@ import Unarchive from "@material-ui/icons/Unarchive";
 import Language from "@material-ui/icons/Language";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
+import StoreIcon from '@material-ui/icons/Store';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import UserProfile from "views/UserProfile/UserProfile.js";
 import TableList from "views/TableList/TableList.js";
 import Typography from "views/Typography/Typography.js";
@@ -52,7 +54,7 @@ const dashboardRoutes = [
     path: "/seller",
     name: "Vendedor",
     rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
+    icon: StoreIcon,
     component: Seller,
     layout: "/admin"
   },
@@ -60,7 +62,7 @@ const dashboardRoutes = [
     path: "/drop-off",
     name: "Ponto de entrega",
     rtlName: "ملف تعريفي للمستخدم",
-    icon: Person,
+    icon: ShoppingBasketIcon,
     component: DropOff,
     layout: "/admin"
   },
