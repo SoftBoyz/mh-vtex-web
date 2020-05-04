@@ -39,13 +39,13 @@ class UserProfile extends React.Component {
     super(props);
 
     this.state = {
+      key: null,
       cnpj: "",
       name: "",
       cep: "",
       address: "",
       number: "",
       complement: "",
-      email: "",
       phone: "",
       error: {},
       loading: false
@@ -71,13 +71,13 @@ class UserProfile extends React.Component {
     let storeInfo = firebaseApi.database().ref('stores').orderByKey();
     storeInfo.on('child_added', snapshot => {
       if(snapshot.val().owner && snapshot.val().owner == uid){
+        this.setState({key: snapshot.key})
         this.setState({cnpj: mask.cnpjMask(snapshot.key)})
         this.setState({name: snapshot.val().name})
         this.setState({cep: mask.cepMask(snapshot.val().cep)})
         this.setState({address: snapshot.val().address})
         this.setState({number: snapshot.val().number})
         this.setState({complement: snapshot.val().complement})
-        this.setState({email: email})
         this.setState({phone:  mask.phoneMask(snapshot.val().phone)})
       }
     })
@@ -97,6 +97,14 @@ class UserProfile extends React.Component {
     }
   }
 
+  handleSubmit(){
+    const { cnpj, name, cep, address, number, complement, phone } = this.state;
+    firebaseApi.database()
+      .ref("/stores")
+      .child("/" + this.state.key)
+      .update({ cnpj, name, cep, address, number, complement, phone });
+  }
+
   cancel(e) {
     window.location.replace("/");
   }
@@ -110,7 +118,6 @@ class UserProfile extends React.Component {
       address,
       number,
       complement,
-      email,
       phone,
       error,
       loading
@@ -197,20 +204,6 @@ class UserProfile extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText="Email"
-                      id="email"
-                      type="email"
-                      inputProps={{
-                        onChange: this.handlechange,
-                        value: email
-                      }}
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <CustomInput
                       labelText="Telefone"
                       id="phone"
                       inputProps={{
@@ -238,7 +231,8 @@ class UserProfile extends React.Component {
                 </GridContainer>
               </CardBody>
               <CardFooter>
-                <Button color="primary" disabled>Salvar</Button>
+                <Button color="primary"
+                  onClick={() => this.handleSubmit()}>Salvar</Button>
               </CardFooter>
             </Card>
           </GridItem>
