@@ -85,15 +85,19 @@ class AddProduct extends React.Component {
       preco,
       estoque,
       peso_volume } = this.state;
-    firebaseApi.database()
-      .ref("/products")
-      .push()
-      .set({ 
-        owner,
-        nome,
-        preco,
-        estoque,
-        peso_volume });
+
+    firebaseApi.database().ref(`/products/${owner}`).push().set({
+      nome,
+      preco,
+      estoque,
+      peso_volume 
+    }, (error) => {
+      if (error) {
+        alert(error)
+      } else {
+        this.props.navigate("ListProducts")
+      }
+    });
   }
   
   cancel(e) {
@@ -119,7 +123,7 @@ class AddProduct extends React.Component {
               <CardBody>
               <Box mx={5}>
                 <GridContainer>
-                  <GridItem xs={12} sm={12} md={5}>
+                  <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
                       labelText="Nome"
                       id="nome"
@@ -136,7 +140,7 @@ class AddProduct extends React.Component {
                   </GridItem>
                 </GridContainer>
                 <GridContainer>
-                <GridItem xs={12} sm={12} md={2}>
+                <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
                       labelText="Preço"
                       id="preco"
@@ -152,7 +156,7 @@ class AddProduct extends React.Component {
                       }}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={2}>
+                  <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
                       labelText="Estoque"
                       id="estoque"
@@ -168,7 +172,7 @@ class AddProduct extends React.Component {
                       }}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={2}>
+                  <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
                       labelText="Peso/Volume"
                       id="peso_volume"
