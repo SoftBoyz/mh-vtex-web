@@ -179,9 +179,6 @@ async function partners(setCenter, setPartners, setProposals) {
 }
 
 const DropOff = (props) => {
-  console.log("DROPOFF");
-  const { routes } = props;
-  console.log(props);
   const [value, setValue] = React.useState(0);
   const [center, setCenter] = React.useState(false);
   const [lojas_parceiras, setPartners] = React.useState({ head: [], body: [] });
