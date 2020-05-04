@@ -14,8 +14,6 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 const firebaseApi = firebase.initializeApp(firebaseConfig);
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-
+export const fbAuth = firebaseApi.auth();
+export const fbDatabase = firebaseApi.database().ref();
 export default firebaseApi;
