@@ -15,6 +15,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import { Button } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -24,7 +25,7 @@ import Maps from "../Maps/Maps";
 
 import {pedidos} from 'components/User.js';
 import OrderLists from 'components/user/OrderList';
-import { Button } from '@material-ui/core';
+import SellerRoutes from 'views/Seller/SellerRoutes'
 
 const styles = {
   cardCategoryWhite: {
@@ -92,15 +93,6 @@ function a11yProps(index) {
   };
 }
 
-function createRow(ID, name, price, stock, weight) {
-  return [ID, name, price, stock, weight, 
-    <div>
-      <Button color="primary" ><EditIcon /></Button>
-      <Button color="primary" ><DeleteIcon /></Button>
-    </div> 
-  ];
-}
-
 const useStyles = makeStyles(styles);
 
 function TableOne() {
@@ -108,52 +100,9 @@ function TableOne() {
 }
 
 function TableTwo() {
-  const classes = useStyles();
-
-  const produtos = [
-    createRow("1", "Maçã", "R$3,70", "123", "1kg"),
-    createRow("2", "Banana", "R$2,20", "123", "1kg"),
-    createRow("3", "Chocolate", "R$6,50", "123", "300g"),
-    createRow("4", "Suco", "R$2,99", "123", "1L"),
-  ]
-
-  return (
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card plain className={classes.gridContainer}>
-          <CardBody>
-            <Button 
-              color="primary" 
-              onClick={() => console.log("teste")}
-              >
-                Adicionar Produto 
-            </Button>
-            <Table
-              tableHeaderColor="primary"
-              tableHead={["ID", "Nome", "Preço","Estoque", "Peso/Volume", "Ações"]}
-              tableData={produtos}
-              style={{margin: "30px"}}
-            />
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
-  );
+  return <SellerRoutes />
 }
-// A special wrapper for <Route> that knows how to
-// handle "sub"-routes by passing them in a `routes`
-// prop to the component it renders.
-function RouteWithSubRoutes(route) {
-  return (
-    <Route
-      path={route.layout + route.path}
-      render={props => (
-        // pass the sub-routes down to keep nesting
-        <route.component {...props} routes={route.routes} />
-      )}
-    />
-  );
-}
+
 export default function SellerTabs() {
   const [value, setValue] = React.useState(0);
 
