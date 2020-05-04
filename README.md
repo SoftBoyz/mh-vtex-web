@@ -1,239 +1,209 @@
-# [Material Dashboard React](https://demos.creative-tim.com/material-dashboard-react/#/dashboard) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fcreativetimofficial.github.io%2Fmaterial-dashboard-react&text=Material%20Dashboard%20React%20-%20Free%20Bootstrap%20Admin%20Template&original_referer=https%3A%2F%2Fdemos.creative-tim.com%2Fmaterial-dashboard-react%2F%3F_ga%3D2.10428917.198078103.1532329372-1803433978.1528781151&via=creativetim&hashtags=react%2Cmaterial-ui)
+###### Shawee
+
+Mega Hack 2020
+
+##### Contexto
+
+**A problemática do comércio local**
 
 
+# 86.400.000.
 
-![version](https://img.shields.io/badge/version-1.8.0-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/material-dashboard-react.svg?maxAge=2592000)]() [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/material-dashboard-react.svg?maxAge=2592000)]() [![Join the chat at https://gitter.im/NIT-dgp/General](https://badges.gitter.im/NIT-dgp/General.svg)](https://gitter.im/creative-tim/material-dashboard?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/E4aHAQy)
+###### Bilhões de reais perdidos de
 
-![Product Gif](src/assets/github/md-react.gif)
+###### faturamento do varejo nas 5 primeiras
 
-Material Dashboard React is a free Material-UI Admin with a fresh, new design inspired by Google's Material Design. We are very excited to introduce our take on the material concepts through an easy to use and beautiful set of components. Material Dashboard React was built over the popular Material-UI framework.
+###### semanas, entre os dias 15 de março e 18
 
-Material Dashboard React makes use of light, surface and movement. The general layout resembles sheets of paper following multiple different layers, so that the depth and order is obvious. The navigation stays mainly on the left sidebar and the content is on the right inside the main panel.
+###### de abril no Brasil.
 
-Material Dashboard React comes with 5 color filter choices for both the sidebar and the card headers (blue, green, orange, red and purple) and an option to have a background image on the sidebar.
-
-Material Dashboard React was created using [create-react-app](https://github.com/facebook/create-react-app) and it uses a framework built by our friend [Olivier - Material-UI v3.1.0](https://github.com/mui-org/material-ui), who did an amazing job creating the backbone for the material effects, animations, ripples and transitions. Big thanks to his team for the effort and forward thinking they put into it.
-
-Special thanks go to:
-+ [React-chartist](https://github.com/fraserxu/react-chartist) for the wonderful charts.
-
-We are very excited to share this dashboard with you and we look forward to hearing your feedback!
-
-You can find the Github Repo here.
-
-## Table of Contents
-
-* [Versions](#versions)
-* [Demo](#demo)
-* [Quick Start](#quick-start)
-* [Documentation](#documentation)
-* [File Structure](#file-structure)
-* [Browser Support](#browser-support)
-* [Resources](#resources)
-* [Reporting Issues](#reporting-issues)
-* [Technical Support or Questions](#technical-support-or-questions)
-* [Licensing](#licensing)
-* [Useful Links](#useful-links)
+###### Fonte: CNC
 
 
-## Versions
+##### Problemática
 
-[<img src="src/assets/github/html.png" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard)
-[<img src="src/assets/github/react.svg" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-react)
-[<img src="src/assets/github/vuejs.png" width="60" height="60" />](https://www.creative-tim.com/product/vue-material-dashboard)
-[<img src="src/assets/github/angular.png" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-angular2)
+O varejo está tentando se adaptar para
+sobreviver frente ao COVID-19 e manter
+seu funcionamento.
 
-
-| HTML | React | Vue | Angular |
-| --- | --- | --- | --- |
-| [![Material Dashboard HTML](src/assets/github/opt_md_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard) | [![Material Dashboard React](src/assets/github/opt_mdr_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard-react) | [![Vue Material Dashboard ](src/assets/github/opt_md_vue_thumbnail.jpg)](https://www.creative-tim.com/product/vue-material-dashboard) | [![Material Dashboard Angular](src/assets/github/opt_md_angular_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard-angular2)
-
-## Demo
-
-| Dashboard | User Profile | Tables | Maps | Notification |
-| --- | --- | --- | --- | --- |
-| [![Start page](src/assets/github/dashboard.png)](https://demos.creative-tim.com/material-dashboard-react/#/dashboard) | [![User profile page](src/assets/github/user_profile.png)](https://demos.creative-tim.com/material-dashboard-react/#/user) | [![Tables page ](src/assets/github/tables.png)](https://demos.creative-tim.com/material-dashboard-react/#/table) | [![Maps Page](src/assets/github/maps.png)](https://demos.creative-tim.com/material-dashboard-react/#/maps) | [![Notification page](src/assets/github/notification.png)](https://demos.creative-tim.com/material-dashboard-react/#/notifications)
-
-[View More](https://demos.creative-tim.com/material-dashboard-react/#/dashboard).
+O comércio está parado, seja por
+decreto governamental ou pelo senso
+comum da população de fortalecer o
+distanciamento social durante essa fase
+crítica.
 
 
-## Quick start
+##### O comércio local
 
-Quick start options:
+Considerando lojas **locais** de pequeno e
+médio porte, a maior parcela das vendas
+ainda **era** feita presencialmente.
 
-- `npm i material-dashboard-react`
-- Clone the repo: `git clone https://github.com/creativetimofficial/material-dashboard-react.git`.
-- [Download from Github](https://github.com/creativetimofficial/material-dashboard-react/archive/master.zip).
-- [Download from Creative Tim](https://www.creative-tim.com/product/material-dashboard-react).
+Para essas lojas, principalmente as que
+vendem produtos de necessidade
+primária, não havia necessidade nem
+incentivo para se **inserir no meio
+digital** , arcar com custos de receber
+encomendas e entrega domiciliar.
 
-
-## Documentation
-The documentation for the Material Dashboard React is hosted at our [website](https://demos.creative-tim.com/material-dashboard-react/#/documentation/tutorial).
-
-
-## File Structure
-
-Within the download you'll find the following directories and files:
 
 ```
-material-dashboard-react
-.
-├── CHANGELOG.md
-├── ISSUE_TEMPLATE.md
-├── LICENSE.md
-├── README.md
-├── bower.json
-├── gulpfile.js
-├── jsconfig.json
-├── package.json
-├── documentation
-│   ├── assets
-│   │   ├── css
-│   │   ├── img
-│   │   │   └── faces
-│   │   └── js
-│   └── tutorial-components.html
-├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   └── manifest.json
-└── src
-    ├── index.js
-    ├── logo.svg
-    ├── routes.js
-    ├── assets
-    │   ├── css
-    │   │   └── material-dashboard-react.css
-    │   ├── github
-    │   │   ├── md-react.gif
-    │   │   └── react.svg
-    │   ├── img
-    │   │   └── faces
-    │   └── jss
-    │       ├── material-dashboard-react
-    │       │   ├── components
-    │       │   ├── layouts
-    │       │   └── views
-    │       └── material-dashboard-react.js
-    ├── components
-    │   ├── Card
-    │   │   ├── Card.js
-    │   │   ├── CardAvatar.js
-    │   │   ├── CardBody.js
-    │   │   ├── CardFooter.js
-    │   │   ├── CardHeader.js
-    │   │   └── CardIcon.js
-    │   ├── CustomButtons
-    │   │   └── Button.js
-    │   ├── CustomInput
-    │   │   └── CustomInput.js
-    │   ├── CustomTabs
-    │   │   └── CustomTabs.js
-    │   ├── FixedPlugin
-    │   │   └── FixedPlugin.js
-    │   ├── Footer
-    │   │   └── Footer.js
-    │   ├── Grid
-    │   │   ├── GridContainer.js
-    │   │   └── GridItem.js
-    │   ├── Navbars
-    │   │   ├── AdminNavbarLinks.js
-    │   │   ├── Navbar.js
-    │   │   └── RTLNavbarLinks.js
-    │   ├── Sidebar
-    │   │   └── Sidebar.js
-    │   ├── Snackbar
-    │   │   ├── Snackbar.js
-    │   │   └── SnackbarContent.js
-    │   ├── Table
-    │   │   └── Table.js
-    │   ├── Tasks
-    │   │   └── Tasks.js
-    │   └── Typography
-    │       ├── Danger.js
-    │       ├── Info.js
-    │       ├── Muted.js
-    │       ├── Primary.js
-    │       ├── Quote.js
-    │       ├── Success.js
-    │       └── Warning.js
-    ├── layouts
-    │   ├── Admin.js
-    │   └── RTL.js
-    ├── variables
-    │   ├── charts.js
-    │   └── general.js
-    └── views
-        ├── Dashboard
-        │   └── Dashboard.js
-        ├── Icons
-        │   └── Icons.js
-        ├── Maps
-        │   └── Maps.js
-        ├── Notifications
-        │   └── Notifications.js
-        ├── RTLPage
-        │   └── RTLPage.js
-        ├── TableList
-        │   └── TableList.js
-        ├── Typography
-        │   └── Typography.js
-        ├── UpgradeToPro
-        │   └── UpgradeToPro.js
-        └── UserProfile
-            └── UserProfile.js
+Sem vendas digitais e logística, essas lojas
+operam com dificuldade , recebendo
+encomendas por telefone.
 ```
 
-## Browser Support
+### Adaptar-se para sobreviver
 
-At present, we officially aim to support the last two versions of the following browsers:
+Chegamos às seguintes situações:
 
-<img src="src/assets/github/chrome.png" width="64" height="64"> <img src="src/assets/github/firefox.png" width="64" height="64"> <img src="src/assets/github/edge.png" width="64" height="64"> <img src="src/assets/github/safari.png" width="64" height="64"> <img src="src/assets/github/opera.png" width="64" height="64">
+**1. Os clientes fazem o pedido e vão buscar,**
+    **expondo-se um pouco.
+**2. Os clientes fazem o pedido e a loja entrega,**
+    **com custo maior.**
 
 
-## Resources
-- Demo: https://demos.creative-tim.com/material-dashboard-react
-- Download Page: https://www.creative-tim.com/product/material-dashboard-react
-- Documentation: https://demos.creative-tim.com/material-dashboard-react/#/documentation/tutorial
-- License Agreement: https://www.creative-tim.com/license
-- Support: https://www.creative-tim.com/contact-us
-- Issues: [Github Issues Page](https://github.com/creativetimofficial/material-dashboard-react/issues)
-- [Material Kit React - For Front End Development](https://www.creative-tim.com/product/material-kit-react?ref=github-mdr-free)
+A smart oferece um meio termo entre essas
+situações, juntamente à um facilitador para
+essa adaptação.
 
-## Reporting Issues
-We use GitHub Issues as the official bug tracker for the Material Dashboard React. Here are some advices for our users that want to report an issue:
 
-1. Make sure that you are using the latest version of the Material Dashboard React. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/).
-2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
-3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
+**Descentralizando o varejo local**
 
-## Technical Support or Questions
 
-If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us) instead of opening an issue.
+##### Cenário 1
+```
+Lojas convencionais
+```
 
-## Licensing
+1. Necessidade de ir ao local para
+escolher suas compras e pagar.
+2. Aglomeração e formação de filas.
+3. Disseminação do vírus propagada
+    pela quebra do distanciamento social.
+4. Pessoas começam a evitar o local e
+a loja perde clientes.
 
-- Copyright 2018 Creative Tim (https://www.creative-tim.com)
-- Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-react/blob/master/LICENSE.md)
 
-## Useful Links
+##### Cenário 2
 
-More products from Creative Tim: <https://www.creative-tim.com/products>
+```
+Lojas com adaptação fraca
+```
+1. Lojas passaram a receber
+encomendas e agora separam os
+pedidos previamente.
+2. O cliente vai apenas pagar e buscar,
+diminuindo o problema da
+aglomeração e formação de filas.
 
-Tutorials: <https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w>
 
-Freebies: <https://www.creative-tim.com/products>
 
-Affiliate Program (earn money): <https://www.creative-tim.com/affiliates/new>
+##### Cenário 3
 
-Social Media:
+```
+Lojas com adaptação regular
+```
+1. Algumas poucas das que se
+adaptaram oferecem a opção de fazer
+entrega domiciliar.
+2. O consumidor paga mais caro.
 
-Twitter: <https://twitter.com/CreativeTim>
+3. A maioria não tem estrutura financeira e
+de logística para implementar esse sistema.
 
-Facebook: <https://www.facebook.com/CreativeTim>
 
-Dribbble: <https://dribbble.com/creativetim>
+##### Proposta
 
-Google+: <https://plus.google.com/+CreativetimPage>
+```
+Descentralização de encomendas
+```
+1. O cliente faz suas compras
+através do aplicativo
 
-Instagram: <https://instagram.com/creativetimofficial>
+2. O cliente escolhe onde
+    prefere buscar a compra
+
+
+3. Uma vez por dia a loja
+    entrega todos os pedidos aos
+    destinos.
+4. O cliente é notificado que os
+    pedidos estão disponíveis e
+    vai buscá-lo.
+
+
+```
+Essa estratégia é
+especialmente vantajosa para
+quem mora em lugares
+afastados de pontos comerciais.
+```
+
+```
+As lojas dividem o custo de
+entrega para vários pedidos. Com
+a descentralização, o custo total
+de entrega por pedido diminui.
+```
+
+###### Funcionamento Detalhado
+```
+Loja faz o cadastro
+```
+```
+Cadastra seus produtos
+ou escolhe ser um ponto
+de entrega
+```
+```
+Loja vendedora escolhe os parceiros
+```
+```
+Parceiros recebem a
+notificação e firmam
+acordo
+```
+```
+Clientes fazem compras pelo aplicativo
+```
+```
+Ponto de entrega
+(parceiro) mais
+próximo é sugerido
+```
+```
+Loja vendedora faz a entrega de todos os
+pedidos juntos periodicamente
+```
+```
+Loja parceira recebe
+produto e cliente recebe a
+notificação para ir buscá-lo
+```
+
+```
+Pode-se ver que a
+descentralização também
+aumenta a quantidade de
+clientes em potencial, ao facilitar
+a comercialização em outras
+áreas da região.
+```
+
+
+#### Time 18
+
+Eric Coelho
+
+Lucas Agra
+
+Phyllipe Bezerra
+
+Ricardo Alves
+
+Thiago Tenório
+
+
+### Shawee - Mega Hack 2020
+
