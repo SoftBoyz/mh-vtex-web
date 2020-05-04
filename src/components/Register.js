@@ -30,6 +30,7 @@ class Register extends React.Component {
   async createStore(e) {
     let data = this.state;
     data.error = {};
+    this.setState({ loading: true });
     let erro = true;
 
     if (data.cnpj.length < 18) {
@@ -38,7 +39,7 @@ class Register extends React.Component {
       data.error.cep = true;
     } else if (!/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(data.email)) {
       data.error.email = true;
-    } else if (data.phone.length < 15) {
+    } else if (data.phone.length < 14) {
       data.error.phone = true;
     } else if (data.password !== data.conf_password) {
       data.error.password = true;
@@ -59,26 +60,24 @@ class Register extends React.Component {
     }
 
     if (erro) {
-      this.setState({ error: data.error });
+      this.setState({ error: data.error, loading: false });
       return;
     }
 
     await fbAuth
       .createUserWithEmailAndPassword(data.email, data.password)
-      .then((e) => {
-        this.setState({ loading: true });
-      })
       .catch((e) => {
         erro = true
         data.error.email = true;
+        data.error.message = "Esse email já está cadastrado";
       })
-      .finally(() => {
-        this.setState({ loading: false });
-      });
 
     if (erro) return;
     
     data = JSON.parse(JSON.stringify(this.state));
+    await fbAuth.signInWithEmailAndPassword(data.email, data.password)
+    // console.log(fbAuth)
+    data.owner = fbAuth.currentUser.uid
 
     delete data.cnpj;
     delete data.error;
@@ -89,10 +88,14 @@ class Register extends React.Component {
 
     const cnpj = this.state.cnpj.replace(/\D/g, "");
 
+    console.log(data)
     fbDatabase
       .child("/stores")
       .child("/" + cnpj)
       .set(data);
+
+    this.setState({ loading: false });
+    window.location.replace("/admin");
   }
 
   handlechange(e) {
@@ -130,8 +133,8 @@ class Register extends React.Component {
     } = this.state;
     return (
       <div>
-        <div className="logo">
-          <span className="name">s-Mart</span>
+        <div className="logo" onClick={this.cancel}>
+          <span className="name">smart</span>
         </div>
         <div className="background"></div>
 
@@ -151,7 +154,7 @@ class Register extends React.Component {
               </div>
               <div>
                 <TextField
-                  label="Nome"
+                  label="Nome da Loja"
                   id="name"
                   margin="normal"
                   value={name}
@@ -216,6 +219,7 @@ class Register extends React.Component {
                   value={email}
                   onChange={this.handlechange}
                   disabled={loading}
+                  helperText={error.message}
                   error={error.email}
                   required
                 />
@@ -260,21 +264,25 @@ class Register extends React.Component {
                   required
                 />
               </div>
+              <div>
+                <small>Já possui conta? <a href="/login">Faça Login</a></small>
+              </div>
             </form>
 
-            {loading ?
-              <CircularProgress/>
-            :
-              <div className="buttons">
-                <Button className="button" variant="outlined" size="small" color="primary" onClick={this.cancel}>
-                  Cancelar
-                </Button>
-                <Button className="button" variant="contained" size="small" color="primary" onClick={this.createStore}>
-                  Cadastrar
-                </Button>
-              </div>
-              
-            }
+            <div className="buttons">
+              {loading ?
+                <CircularProgress size={65}/>
+              :
+                <div>
+                  <Button className="button" variant="outlined" size="small" color="primary" onClick={this.cancel}>
+                    Cancelar
+                  </Button>
+                  <Button className="button" variant="contained" size="small" color="primary" onClick={this.createStore}>
+                    Cadastrar
+                  </Button>
+                </div>
+              }
+          </div>
         </div>
       </div>
     );

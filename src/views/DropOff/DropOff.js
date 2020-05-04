@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Switch,
@@ -17,28 +17,9 @@ import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import firebaseApi, { fbDatabase, fbAuth } from "../../services/firebase.conf";
 
 import Button from "../../components/CustomButtons/Button.js";
-
-const propostas = {
-  head: ["Loja", "Proposta"],
-  body:[
-    ["Teste", "Teste"],
-    ["Teste", "Teste"],
-    ["Teste", "Teste"],
-    ["Teste", "Teste"],
-  ]
-}
-
-const lojas_parceiras = {
-  head: ["Loja", "field"],
-  body: [
-    ["teste", "teste"],
-    ["teste", "teste"],
-    ["teste", "teste"],
-    ["teste", "teste"],
-  ]
-}
 
 const styles = {
   cardCategoryWhite: {
@@ -134,11 +115,80 @@ function TableRender(props) {
   );
 }
 
+async function getData(table) {
+  const user = fbAuth.currentUser.uid;
+  let data = {center: false, partners: [], proposals: []}
+  let cnpj;
+
+  var userQuery = firebaseApi.database().ref(table);
+  await userQuery.once("value", function(snapshot) {
+    snapshot.forEach(function(child) {
+      if (child.val().owner == user) {
+        cnpj = child.key;
+      }
+    });
+  });
+  
+  var query = firebaseApi.database().ref(table);
+  await query.once("value", snapshot => {
+    snapshot.forEach(child => {
+      if (child.key == cnpj){
+        data = Object.assign(data, child.val());
+        data.center = !child.val().center;
+      }
+    });
+  })
+
+  return {data, cnpj};
+}
+
+async function storeCenter(setCenter) {
+  
+  const {data, cnpj} = await getData('/stores')
+
+  setCenter(data.center);
+
+  fbDatabase
+      .child("/stores")
+      .child("/" + cnpj)
+      .set(data);
+}
+
+async function partners(setCenter, setPartners, setProposals) {
+  const {data} = await getData('/stores')
+
+  const proposals = Object.values(data.proposals);
+  const proposalsArray = proposals.map(el => {
+    return Object.values(el);
+  })
+
+  setCenter(!data.center);
+
+  const propostas = {
+    head: ["Loja", "Proposta", "Ação"],
+    body: proposalsArray
+  }
+  setProposals(propostas);
+
+  const lojas_parceiras = {
+    head: ["Loja", "Ação"],
+    body: data.partners
+  }
+  setPartners(lojas_parceiras);
+}
+
 const DropOff = (props) => {
   console.log('DROPOFF')
   const {routes} = props;
   console.log(props)
   const [value, setValue] = React.useState(0);
+  const [center, setCenter] = React.useState(false);
+  const [lojas_parceiras, setPartners] = React.useState({head: [], body: []});
+  const [propostas, setProposals] = React.useState({head: [], body: []});
+
+  useEffect(() => {
+    partners(setCenter, setPartners, setProposals);
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -149,7 +199,11 @@ const DropOff = (props) => {
       <GridItem xs={12} sm={12} md={12}>
         <Button 
           color={"primary"}
-          >Ativar local como ponto de entrega</Button>
+          onClick={() => storeCenter(setCenter)}
+          >
+            {center ? "Desativar " : "Ativar "}
+            local como ponto de entrega
+          </Button>
       </GridItem>
       <GridItem xs={12} sm={12} md={12}>
         <Paper square>
@@ -166,7 +220,7 @@ const DropOff = (props) => {
             <TableRender head={propostas.head} body={propostas.body} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-          <TableRender head={lojas_parceiras.head} body={lojas_parceiras.body} />
+            <TableRender head={lojas_parceiras.head} body={lojas_parceiras.body} />
           </TabPanel>
         </Paper>
       </GridItem>

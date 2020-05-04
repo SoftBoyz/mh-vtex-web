@@ -16,7 +16,6 @@ import "assets/css/material-dashboard-react.css?v=1.8.0";
 
 const hist = createBrowserHistory();
 
-
 ReactDOM.render(
   <UserProvider>
     <Router history={hist}>
@@ -57,7 +56,7 @@ ReactDOM.render(
         {/* <Route path='/user/:id/store-partners' component={} /> */}
         {/* <Route path='/user/:id/store-partner/:store-id' component={} /> */}
         {/* <Route path='/user/:id/store-partner/:store-id/edit' component={} /> */}
-        
+
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </Router>
