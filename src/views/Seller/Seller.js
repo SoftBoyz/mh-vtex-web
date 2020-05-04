@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { func } from 'prop-types';
 import { Switch, Route } from "react-router-dom";
-import firebaseApi, { fbAuth } from '../../services/firebase.conf';
+import firebaseApi, { fbAuth, fbDatabase } from '../../services/firebase.conf';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -61,13 +61,22 @@ const styles = {
 };
 
 function TableRender(props) {
-  const {head, body} = props;
+  const {head, body, setValue, button} = props;
   const classes = useStyles();
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
         <Card plain className={classes.gridContainer}>
           <CardBody>
+            {button && 
+              <Button 
+                color={"primary"}
+                variant="outlined"
+                onClick={() => setValue(3)}
+                >
+                  Adicionar Parceiro
+              </Button>
+            }
             <Table
               tableHeaderColor="primary"
               tableHead={head}
@@ -123,12 +132,48 @@ function TableTwo() {
   return <SellerRoutes />
 }
 
+async function addCenter(cnpjStore, cnpjCenter, setStores, setPartners) {
+  var center = {}
+  cnpjStore = cnpjStore.replace(/\D/g, '')
+  cnpjCenter = cnpjCenter.replace(/\D/g, '')
+
+  var userQuery = firebaseApi.database().ref('/stores');
+  await userQuery.once("value", function(snapshot) {
+    snapshot.forEach(function(child) {
+      if(child.key == cnpjCenter) {
+        center = child.val()
+      }
+    });
+  });
+
+  const partner = {name: center.name}
+
+  await fbDatabase
+      .child("/stores")
+      .child("/" + cnpjStore)
+      .child("/partners")
+      .child("/" + cnpjCenter.replace(/\D/g, ''))
+      .set(partner);
+
+  partners(setStores, setPartners);
+}
+
+function addButton(cnpjStore, cnpjCenter, setStores, setPartners) {
+  return <Button color="primary" onClick={() => addCenter(cnpjStore, cnpjCenter, setStores, setPartners)} ><AddIcon /></Button>;
+}
+
+function createDiv() {
+  return <div>
+    <Button color="primary" ><EditIcon /></Button>
+    <Button color="primary" ><DeleteIcon /></Button>
+  </div>
+}
+
 async function getData(table) {
-  let user = ''
-  await firebaseApi.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      user = user.uid
-      console.log(user)
+  var user = ''
+  await firebaseApi.auth().onAuthStateChanged(function (u) {
+    if (u) {
+      user = u.uid
     }
   })
   let data = []
@@ -145,10 +190,14 @@ async function getData(table) {
     });
   });
   
+  var keys = []
+  if (store.partners)
+    keys = Object.keys(store.partners);
+
   var query = firebaseApi.database().ref(table);
   await query.once("value", snapshot => {
     snapshot.forEach(child => {
-      if (child.key != cnpj && child.val().center == true){
+      if (child.key != cnpj && child.val().center == true && !keys.includes(child.key)){
         data.push({cnpj: child.key, ...child.val()});
       }
     });
@@ -156,36 +205,51 @@ async function getData(table) {
 
   data.splice(store, 1);
 
-  return {data, cnpj};
+  return {data, cnpj, store};
 }
 
-async function partners(setStores) {
-  const {data} = await getData('/stores')
+async function partners(setStores, setPartners) {
+  const {data, store, cnpj} = await getData('/stores')
 
   const storesArray = data.map(el => {
-    const store = [el.cnpj, el.name, '']
-    return store;
+    return [el.cnpj, el.name, addButton(cnpj, el.cnpj, setStores, setPartners)];
   })
+  
+  let partnersArray = []
+  if (store.partners) {
+    const keys = Object.keys(store.partners)
+    partnersArray = Object.values(store.partners).map((el, index) => {
+      const partner = [keys[index], el.name, createDiv()]
+      return partner;
+    })
+  }
 
-
-  const lojas = {
+  const stores = {
     head: ["CNPJ", "Loja", "Ação"],
     body: storesArray
   }
-  setStores(lojas);
+
+  const partners = {
+    head: ["CNPJ", "Loja", "Ações"],
+    body: partnersArray
+  }
+
+  setStores(stores);
+  setPartners(partners)
 
 }
 
 export default function SellerTabs() {
   const [value, setValue] = React.useState(0);
   const [lojas_disponiveis, setStores] = React.useState({head: ["CNPJ", "Loja", "Ação"], body: []});
+  const [parceiros, setPartners] = React.useState({head: ["CNPJ", "Loja", "Ações"], body: []});
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    partners(setStores)
+    partners(setStores, setPartners)
   }, []);
 
   return (
@@ -200,7 +264,7 @@ export default function SellerTabs() {
         <Tab label="Pedidos" />
         <Tab label="Produtos cadastrados" />
         <Tab label="Parceiros" />
-        <Tab label="Novo ponto de entrega" />
+        <Tab label="Parceiros Elegíveis" />
       </Tabs>
       <TabPanel value={value} index={0}>
         <TableOne />
@@ -209,7 +273,8 @@ export default function SellerTabs() {
         <TableTwo />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Maps />
+        {/* <Maps /> */}
+        <TableRender head={parceiros.head} body={parceiros.body} button={true} setValue={setValue} />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <TableRender head={lojas_disponiveis.head} body={lojas_disponiveis.body} />

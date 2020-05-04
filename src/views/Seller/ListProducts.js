@@ -77,6 +77,7 @@ export default function ListProducts(props){
             <CardBody>
               <Button 
                 color="primary" 
+                variant="outlined"
                 onClick={() => props.navigate("ListProducts", "AddProduct")}
                 >
                   Adicionar Produto 
