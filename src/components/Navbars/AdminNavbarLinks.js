@@ -21,6 +21,8 @@ import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
+import firebaseApi from "../../services/firebase.conf";
+
 const useStyles = makeStyles(styles);
 
 export default function AdminNavbarLinks() {
@@ -47,6 +49,14 @@ export default function AdminNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+  const handleLogout = () => {
+    firebaseApi.auth().signOut().then(function() {
+      window.location.replace("/");
+    }).catch(function(error) {
+      alert(error)
+    });
+    
+  }
   return (
     <div>
       <div className={classes.searchWrapper}>
@@ -194,20 +204,20 @@ export default function AdminNavbarLinks() {
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={() => window.location.replace("/admin/user")}
                       className={classes.dropdownItem}
                     >
                       Profile
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Settings
-                    </MenuItem>
+                    </MenuItem> */}
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={handleLogout}
                       className={classes.dropdownItem}
                     >
                       Logout
