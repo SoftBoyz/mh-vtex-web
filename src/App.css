@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   overflow-x: hidden;
 }
 
@@ -11,7 +11,7 @@ body {
 }
 
 .header::after {
-  content: '';
+  content: "";
   position: absolute;
   background-image: url(images/header2.svg);
   background-repeat: no-repeat;
@@ -34,9 +34,9 @@ body {
 }
 
 .header .name::before {
-  content: '';
+  content: "";
   position: absolute;
-  top: -50px;  
+  top: -50px;
   left: -120px;
   background-image: url(images/logo_white.png);
   background-repeat: no-repeat;
@@ -48,10 +48,11 @@ body {
 .slogan {
   position: relative;
   z-index: 1;
-  color: rgba(255, 255, 255, .8);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 40px;
   margin-top: 10%;
   margin-left: 11%;
+  font-family: Ubuntu;
 }
 
 .options {
@@ -81,7 +82,7 @@ body {
 }
 
 .options li a:hover {
-  background-color: rgba(0, 0, 0, .2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .header .image {
@@ -91,7 +92,7 @@ body {
 }
 
 .header .image::after {
-  content: '';
+  content: "";
   position: absolute;
   background-image: url(images/deliveries.svg);
   background-repeat: no-repeat;
@@ -118,7 +119,7 @@ body {
   margin: 0 auto;
 }
 
-.info div:nth-child(n+2) {
+.info div:nth-child(n + 2) {
   margin-top: 200px;
 }
 
@@ -126,7 +127,9 @@ body {
   display: block;
 }
 
-.title-left, .title-right {
+.title-left,
+.title-right,
+.title {
   width: 50%;
   font-size: 50px;
   font-weight: 400;
@@ -179,10 +182,29 @@ body {
   line-height: 1.5em;
 }
 
+.video {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.video iframe {
+  height: 30vw;
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
 .footer {
   position: relative;
-  background: rgb(83,109,254);
-  background: linear-gradient(245deg, rgba(83,109,254,1) 0%, rgba(15,25,121,1) 100%);
+  background: rgb(83, 109, 254);
+  background: linear-gradient(
+    245deg,
+    rgba(83, 109, 254, 1) 0%,
+    rgba(15, 25, 121, 1) 100%
+  );
   width: 100vw;
   height: 200px;
   margin-top: 200px;
