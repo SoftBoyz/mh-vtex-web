@@ -128,6 +128,7 @@ async function getData(table) {
   await firebaseApi.auth().onAuthStateChanged(function (user) {
     if (user) {
       user = user.uid
+      console.log(user)
     }
   })
   let data = []
