@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { Switch, Route } from "react-router-dom";
-import firebaseApi, { fbAuth } from '../../services/firebase.conf';
+import firebaseApi, { fbAuth } from "../../services/firebase.conf";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -10,22 +10,22 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Table from "components/Table/Table.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
-import Tab from '@material-ui/core/Tab';
-import Box from '@material-ui/core/Box';
-import { Button } from '@material-ui/core';
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Typography from "@material-ui/core/Typography";
+import Tab from "@material-ui/core/Tab";
+import Box from "@material-ui/core/Box";
+import { Button } from "@material-ui/core";
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import AddIcon from "@material-ui/icons/Add";
 
 import Maps from "../Maps/Maps";
 
-import {pedidos} from 'components/User.js';
-import OrderLists from 'components/user/OrderList';
-import SellerRoutes from 'views/Seller/SellerRoutes'
+import { pedidos } from "components/User.js";
+import OrderLists from "components/user/OrderList";
+import SellerRoutes from "views/Seller/SellerRoutes";
 
 const styles = {
   cardCategoryWhite: {
@@ -34,11 +34,11 @@ const styles = {
       margin: "0",
       fontSize: "14px",
       marginTop: "0",
-      marginBottom: "0"
+      marginBottom: "0",
     },
     "& a,& a:hover,& a:focus": {
-      color: "#FFFFFF"
-    }
+      color: "#FFFFFF",
+    },
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -52,16 +52,16 @@ const styles = {
       color: "#777",
       fontSize: "65%",
       fontWeight: "400",
-      lineHeight: "1"
-    }
+      lineHeight: "1",
+    },
   },
   gridContainer: {
     marginTop: "0px",
-  }
+  },
 };
 
 function TableRender(props) {
-  const {head, body} = props;
+  const { head, body } = props;
   const classes = useStyles();
   return (
     <GridContainer>
@@ -109,7 +109,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -120,71 +120,72 @@ function TableOne() {
 }
 
 function TableTwo() {
-  return <SellerRoutes />
+  return <SellerRoutes />;
 }
 
 async function getData(table) {
-  let user = ''
-  await firebaseApi.auth().onAuthStateChanged(function (user) {
+  let user = "";
+  await firebaseApi.auth().onAuthStateChanged(function(user) {
     if (user) {
-      user = user.uid
+      user = user.uid;
     }
-  })
-  let data = []
-  let store = {}
+  });
+  let data = [];
+  let store = {};
   let cnpj;
 
   var userQuery = firebaseApi.database().ref(table);
   await userQuery.once("value", function(snapshot) {
     snapshot.forEach(function(child) {
       if (child.val().owner == user) {
-        store = child.val()
+        store = child.val();
         cnpj = child.key;
       }
     });
   });
-  
+
   var query = firebaseApi.database().ref(table);
-  await query.once("value", snapshot => {
-    snapshot.forEach(child => {
-      if (child.key != cnpj && child.val().center == true){
-        data.push({cnpj: child.key, ...child.val()});
+  await query.once("value", (snapshot) => {
+    snapshot.forEach((child) => {
+      if (child.key != cnpj && child.val().center == true) {
+        data.push({ cnpj: child.key, ...child.val() });
       }
     });
-  })
+  });
 
   data.splice(store, 1);
 
-  return {data, cnpj};
+  return { data, cnpj };
 }
 
 async function partners(setStores) {
-  const {data} = await getData('/stores')
+  const { data } = await getData("/stores");
 
-  const storesArray = data.map(el => {
-    const store = [el.cnpj, el.name, '']
+  const storesArray = data.map((el) => {
+    const store = [el.cnpj, el.name, ""];
     return store;
-  })
-
+  });
 
   const lojas = {
     head: ["CNPJ", "Loja", "Ação"],
-    body: storesArray
-  }
+    body: storesArray,
+  };
   setStores(lojas);
-
 }
 
 export default function SellerTabs() {
   const [value, setValue] = React.useState(0);
-  const [lojas_disponiveis, setStores] = React.useState({head: ["CNPJ", "Loja", "Ação"], body: []});
+  const [lojas_disponiveis, setStores] = React.useState({
+    head: ["CNPJ", "Loja", "Ação"],
+    body: [],
+  });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    partners(setStores)
+    partners(setStores);
   }, []);
 
   return (
@@ -199,7 +200,7 @@ export default function SellerTabs() {
         <Tab label="Pedidos" />
         <Tab label="Produtos cadastrados" />
         <Tab label="Parceiros" />
-        <Tab label="Novo ponto de entrega" />
+        <Tab label="Parceiros Elegíveis" />
       </Tabs>
       <TabPanel value={value} index={0}>
         <TableOne />
@@ -211,7 +212,10 @@ export default function SellerTabs() {
         <Maps />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <TableRender head={lojas_disponiveis.head} body={lojas_disponiveis.body} />
+        <TableRender
+          head={lojas_disponiveis.head}
+          body={lojas_disponiveis.body}
+        />
       </TabPanel>
     </Paper>
   );
