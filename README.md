@@ -57,10 +57,8 @@ encomendas por telefone.
 
 Chegamos às seguintes situações:
 
-**1. Os clientes fazem o pedido e vão buscar,**
-    **expondo-se um pouco.**
-**2. Os clientes fazem o pedido e a loja entrega,**
-    **com custo maior.**
+1. **Os clientes fazem o pedido e vão buscar, expondo-se um pouco.**
+2. **Os clientes fazem o pedido e a loja entrega, com custo maior.**
 
 
 A smart oferece um meio termo entre essas
