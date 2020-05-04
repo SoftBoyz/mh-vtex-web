@@ -40,7 +40,7 @@ class App extends Component {
       <div>
         <div className="header">
           <div className="name">smart</div>
-          <div className="slogan">Descentralizando o varejo local!</div>
+          <div className="slogan">Descentralizando o varejo local</div>
           <div className="options">
             <ul>
               <li>
