@@ -3,6 +3,7 @@ import business_deal from './images/business_deal.svg';
 import online_groceries from './images/online_groceries.svg';
 import questions from './images/questions.svg';
 import success_factors from './images/success_factors.svg';
+import heavy_box from './images/heavy_box.svg';
 import 'App.css';
 
 class App extends Component {
@@ -64,11 +65,26 @@ class App extends Component {
 
           <div>
             <img src={success_factors} className="image-left" />
-            <span className="title-right">Outro titulo aqui</span><br/>
+            <span className="title-right">Como funciona?</span><br/>
             <span className="text-right">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet diam mi. Maecenas nec velit pharetra, iaculis nunc in, dapibus nisi. Proin fringilla, mauris at dapibus dapibus, augue mi volutpat massa, a placerat sapien dolor eget nulla. Nunc vitae tristique nisl. Etiam congue eu augue in laoreet. Nam et vulputate nulla. Fusce rutrum sollicitudin lacus et bibendum. Curabitur a libero lacinia odio iaculis maximus. Mauris nec odio consectetur, elementum augue ac, suscipit nibh. Sed eu lacus purus.
+              O primeiro passo é cadastrar sua empresa como loja para vender seus produtos ou como ponto 
+              de entrega para receber os produtos de outra loja, ou os dois. Em seguida é possível encontrar 
+              parceiros para distribuir seus produtos na sua cidade. Os clientes pedem no aplicativo o produto 
+              de uma loja e escolhem o ponto de entrega mais próximo dele. 
             </p>
+            </span>
+          </div>
+
+          <div>
+            <img src={heavy_box} className="image-right" />
+            <span className="title-left">O cliente pediu, e agora?</span><br/>
+            <span className="text-left">
+              <p>
+                O produto levará um tempo para ser processado juntamente a outros pedidos da loja, depois de um 
+                tempo a loja deverá enviar os pedidos para os pontos de entregas e notificar os clientes do envio 
+                através do aplicativo.
+              </p>
             </span>
           </div>
         </div>
