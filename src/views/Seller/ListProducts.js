@@ -133,8 +133,9 @@ class ListProducts extends React.Component{
           <Card plain className={classes.gridContainer}>
             <CardBody>
               <Button 
-                color="primary" 
+                color="primary"
                 onClick={() => this.props.navigate("ListProducts", "AddProduct")}
+                variant="outlined"
                 >
                   Adicionar Produto 
               </Button>

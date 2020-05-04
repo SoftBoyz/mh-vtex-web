@@ -88,7 +88,6 @@ class Register extends React.Component {
 
     const cnpj = this.state.cnpj.replace(/\D/g, "");
 
-    console.log(data)
     fbDatabase
       .child("/stores")
       .child("/" + cnpj)
