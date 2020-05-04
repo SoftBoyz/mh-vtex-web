@@ -1,6 +1,6 @@
 import React from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/styles';
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -17,6 +17,8 @@ import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
+
+import firebaseApi, { fbAuth } from "../../services/firebase.conf";
 
 const styles = {
     cardCategoryWhite: {
@@ -51,25 +53,80 @@ const styles = {
     }
 };
 
-function createRow(ID, name, price, stock, weight) {
-    return [ID, name, price, stock, weight, 
-      <div>
-        <Button color="primary" ><EditIcon /></Button>
-        <Button color="primary" ><DeleteIcon /></Button>
-      </div> 
-    ];
-}
+class ListProducts extends React.Component{
 
-const produtos = [
-    createRow("1", "Maçã", "R$3,70", "123", "1kg"),
-    createRow("2", "Banana", "R$2,20", "123", "1kg"),
-    createRow("3", "Chocolate", "R$6,50", "123", "300g"),
-    createRow("4", "Suco", "R$2,99", "123", "1L"),
-]
+  constructor(props) {
+    super(props);
 
-const useStyles = makeStyles(styles);
-export default function ListProducts(props){
-    const classes = useStyles();
+    this.state = {
+      products: []
+    };    
+
+    this.handleDelete = this.handleDelete.bind(this)
+    this.createRow = this.createRow.bind(this)
+    this.onRemoveItem = this.onRemoveItem.bind(this)
+  }
+
+  async componentDidMount() {
+    var user = fbAuth.currentUser;
+    var name, email, photoUrl, uid, emailVerified;
+
+    if (user != null) {
+      name = user.displayName;
+      email = user.email;
+      photoUrl = user.photoURL;
+      emailVerified = user.emailVerified;
+      uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                      // this value to authenticate with your backend server, if
+                      // you have one. Use User.getToken() instead.
+      this.setState({ owner: uid })
+
+      
+      var query = firebaseApi.database().ref(`products/${uid}`);
+      
+      await query.once("value", snapshot => {
+        snapshot.forEach(child => {
+          let product = { data: child.val(), id: child.key };
+          this.setState({ products: [product].concat(this.state.products) });
+        });
+      })
+      
+    }
+  }
+
+  handleDelete(productId, key){
+    firebaseApi.database().ref(`/products/${this.state.owner}`)
+      .child(`${productId}`).remove()
+    
+    this.onRemoveItem(key)
+  }
+
+  onRemoveItem = i => {
+    this.setState(state => {
+      const products = state.products.filter((item, j) => i !== j);
+ 
+      return {
+        products,
+      };
+    });
+  };
+  
+  createRow(key, productData, productId) {
+      return [productData.nome, productData.preco, productData.estoque, productData.peso_volume, 
+        <div>
+          <Button color="primary" ><EditIcon /></Button>
+          <Button color="primary" 
+            onClick={() => {
+              this.handleDelete(productId, key)
+            }}
+            ><DeleteIcon /></Button>
+        </div> 
+      ];
+  }
+  
+    
+  render(){
+    const { classes } = this.props;
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
@@ -77,14 +134,16 @@ export default function ListProducts(props){
             <CardBody>
               <Button 
                 color="primary" 
-                onClick={() => props.navigate("ListProducts", "AddProduct")}
+                onClick={() => this.props.navigate("ListProducts", "AddProduct")}
                 >
                   Adicionar Produto 
               </Button>
               <Table
                 tableHeaderColor="primary"
-                tableHead={["ID", "Nome", "Preço","Estoque", "Peso/Volume", "Ações"]}
-                tableData={produtos}
+                tableHead={["Nome", "Preço","Estoque", "Peso/Volume", "Ações"]}
+                tableData={this.state.products.map((prop, key) => {
+                  return this.createRow(key, prop.data, prop.id)
+                })}
                 style={{margin: "30px"}}
               />
             </CardBody>
@@ -92,4 +151,7 @@ export default function ListProducts(props){
         </GridItem>
       </GridContainer>
     );
+  }
 }
+
+export default withStyles(styles)(ListProducts);
