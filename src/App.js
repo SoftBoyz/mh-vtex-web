@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import business_deal from './images/business_deal.svg';
 import online_groceries from './images/online_groceries.svg';
 import questions from './images/questions.svg';
 import success_factors from './images/success_factors.svg';
@@ -23,7 +22,6 @@ class App extends Component {
           </div>
           <div className="options">
             <ul>
-              <li><a href="#">Sobre Nós</a></li>
               <li><a href="/login">Entrar</a></li>
               <li><a href="/register">Cadastrar</a></li>
             </ul>
@@ -33,7 +31,7 @@ class App extends Component {
 
         <div className="info">
           <div>
-            <img src={questions} className="image-left" />
+            <img src={questions} className="image-left" alt="o que é?"/>
             <span className="title-right">O que é?</span><br/>
             <span className="text-right">
             <p>
@@ -50,7 +48,7 @@ class App extends Component {
           </div>
 
           <div>
-            <img src={online_groceries} className="image-right" />
+            <img src={online_groceries} className="image-right" alt="Quem pode usar?"/>
             <span className="title-left">Quem pode usar?</span><br/>
             <span className="text-left">
               <p>
@@ -64,7 +62,7 @@ class App extends Component {
           </div>
 
           <div>
-            <img src={success_factors} className="image-left" />
+            <img src={success_factors} className="image-left" alt="Como funciona?"/>
             <span className="title-right">Como funciona?</span><br/>
             <span className="text-right">
             <p>
@@ -77,7 +75,7 @@ class App extends Component {
           </div>
 
           <div>
-            <img src={heavy_box} className="image-right" />
+            <img src={heavy_box} className="image-right" alt="O cliente pediu, e agora?"/>
             <span className="title-left">O cliente pediu, e agora?</span><br/>
             <span className="text-left">
               <p>

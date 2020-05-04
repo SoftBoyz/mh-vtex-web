@@ -39,7 +39,7 @@ class Register extends React.Component {
       data.error.cep = true;
     } else if (!/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(data.email)) {
       data.error.email = true;
-    } else if (data.phone.length < 15) {
+    } else if (data.phone.length < 14) {
       data.error.phone = true;
     } else if (data.password !== data.conf_password) {
       data.error.password = true;
@@ -66,21 +66,18 @@ class Register extends React.Component {
 
     await fbAuth
       .createUserWithEmailAndPassword(data.email, data.password)
-      .then(() => {
-        window.location.replace("/admin");
-      })
       .catch((e) => {
         erro = true
         data.error.email = true;
         data.error.message = "Esse email já está cadastrado";
       })
-      .finally(() => {
-        this.setState({ loading: false });
-      });
 
     if (erro) return;
     
     data = JSON.parse(JSON.stringify(this.state));
+    await fbAuth.signInWithEmailAndPassword(data.email, data.password)
+    // console.log(fbAuth)
+    data.owner = fbAuth.currentUser.uid
 
     delete data.cnpj;
     delete data.error;
@@ -91,10 +88,14 @@ class Register extends React.Component {
 
     const cnpj = this.state.cnpj.replace(/\D/g, "");
 
+    console.log(data)
     fbDatabase
       .child("/stores")
       .child("/" + cnpj)
       .set(data);
+
+    this.setState({ loading: false });
+    window.location.replace("/admin");
   }
 
   handlechange(e) {
