@@ -2,7 +2,6 @@ import React from "react";
 // @material-ui/core components
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
-import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -10,11 +9,10 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
-import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
-import { fbDatabase, fbAuth } from "../../services/firebase.conf";
+import firebaseApi, { fbAuth } from "../../services/firebase.conf";
 import * as mask from "../../mask";
 
 const styles = {
@@ -56,6 +54,35 @@ class UserProfile extends React.Component {
     this.cancel = this.cancel.bind(this);
   }
 
+  componentDidMount() {
+    var user = fbAuth.currentUser;
+    var name, email, photoUrl, uid, emailVerified;
+
+    if (user != null) {
+      name = user.displayName;
+      email = user.email;
+      photoUrl = user.photoURL;
+      emailVerified = user.emailVerified;
+      uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                      // this value to authenticate with your backend server, if
+                      // you have one. Use User.getToken() instead.
+    }
+
+    let storeInfo = firebaseApi.database().ref('stores').orderByKey();
+    storeInfo.on('child_added', snapshot => {
+      if(snapshot.val().owner && snapshot.val().owner == uid){
+        this.setState({cnpj: mask.cnpjMask(snapshot.key)})
+        this.setState({name: snapshot.val().name})
+        this.setState({cep: mask.cepMask(snapshot.val().cep)})
+        this.setState({address: snapshot.val().address})
+        this.setState({number: snapshot.val().number})
+        this.setState({complement: snapshot.val().complement})
+        this.setState({email: email})
+        this.setState({phone:  mask.phoneMask(snapshot.val().phone)})
+      }
+    })
+  }
+
   handlechange(e) {
     let data = e.target.value;
 
@@ -95,7 +122,7 @@ class UserProfile extends React.Component {
             <Card>
               <CardHeader color="primary">
                 <h4 className={classes.cardTitleWhite}>Editar Perfil</h4>
-                <p className={classes.cardCategoryWhite}>Complete your profile</p>
+                <p className={classes.cardCategoryWhite}>Editar perfil da loja</p>
               </CardHeader>
               <CardBody>
                 <GridContainer>

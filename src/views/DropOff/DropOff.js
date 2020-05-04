@@ -135,9 +135,6 @@ function TableRender(props) {
 }
 
 const DropOff = (props) => {
-  console.log('DROPOFF')
-  const {routes} = props;
-  console.log(props)
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
