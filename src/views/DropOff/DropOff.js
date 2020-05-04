@@ -113,12 +113,7 @@ function TableRender(props) {
 }
 
 async function getData(table) {
-  let user = "";
-  await firebaseApi.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      user = user.uid;
-    }
-  });
+  const user = fbAuth.currentUser.uid;
   let data = { center: false, partners: [], proposals: [] };
   let cnpj;
 

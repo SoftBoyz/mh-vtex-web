@@ -123,22 +123,30 @@ function TableTwo() {
   return <SellerRoutes />
 }
 
+function addButton() {
+  return <Button color="primary" ><AddIcon /></Button>;
+}
+
+function deleteButton() {
+  return <Button color="primary" ><DeleteIcon /></Button>;
+}
+
+function editButton() {
+  return <Button color="primary" ><EditIcon /></Button>;
+}
+
 async function getData(table) {
-  let user = ''
-  await firebaseApi.auth().onAuthStateChanged(function (user) {
-    if (user) {
-      user = user.uid
-    }
-  })
+  const user = fbAuth.currentUser.uid
   let data = []
   let store = {}
   let cnpj;
 
+ 
   var userQuery = firebaseApi.database().ref(table);
   await userQuery.once("value", function(snapshot) {
     snapshot.forEach(function(child) {
       if (child.val().owner == user) {
-        store = child.val()
+        store = child
         cnpj = child.key;
       }
     });
@@ -155,36 +163,52 @@ async function getData(table) {
 
   data.splice(store, 1);
 
-  return {data, cnpj};
+  return {data, cnpj, store};
 }
 
-async function partners(setStores) {
-  const {data} = await getData('/stores')
+async function partners(setStores, setPartners) {
+  const {data, store} = await getData('/stores')
+  console.log("lolja:",store)
 
   const storesArray = data.map(el => {
-    const store = [el.cnpj, el.name, '']
+    const store = [el.cnpj, el.name, addButton()]
     return store;
   })
 
 
-  const lojas = {
+  let partnersArray = []
+  if (store.partners) {
+    partnersArray = store.partners.map(el => {
+      const partner = [Object.keys(el), el.name, editButton(), deleteButton()]
+      return partner;
+    })
+  }
+
+  const stores = {
     head: ["CNPJ", "Loja", "Ação"],
     body: storesArray
   }
-  setStores(lojas);
+  const partners = {
+    head: ["Loja", "Ações"],
+    body: partnersArray
+  }
+
+  setStores(stores);
+  setPartners(partners)
 
 }
 
 export default function SellerTabs() {
   const [value, setValue] = React.useState(0);
   const [lojas_disponiveis, setStores] = React.useState({head: ["CNPJ", "Loja", "Ação"], body: []});
+  const [parceiros, setPartners] = React.useState({head: ["CNPJ", "Loja", "Ações"], body: []});
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    partners(setStores)
+    partners(setStores, setPartners)
   }, []);
 
   return (
@@ -208,7 +232,8 @@ export default function SellerTabs() {
         <TableTwo />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Maps />
+        {/* <Maps /> */}
+        <TableRender head={parceiros.head} body={parceiros.body} />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <TableRender head={lojas_disponiveis.head} body={lojas_disponiveis.body} />
