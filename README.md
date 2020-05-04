@@ -1,6 +1,14 @@
-###### Shawee
+### Shawee - Mega Hack 2020
 
-Mega Hack 2020
+##### Contexto
+
+**A problemática do comércio local**
+
+
+# R$ 86.400.000.000,00
+#### Perdidos de faturamento do varejo nas 5 primeiras semanas, entre os dias 15 de março e 18 de abril no Brasil.
+
+###### Fonte: CNC
 
 ##### Problemática
 
