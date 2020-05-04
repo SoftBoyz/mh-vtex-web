@@ -3,11 +3,34 @@ import online_groceries from './images/online_groceries.svg';
 import questions from './images/questions.svg';
 import success_factors from './images/success_factors.svg';
 import heavy_box from './images/heavy_box.svg';
+import agreement from './images/agreement.svg'
 import 'App.css';
 
+class Info extends Component {
+  constructor(props) {
+    super(props)
+
+  }
+  render () {
+    return(
+      <div>
+        <img src={this.props.img_src} className={"image-"+this.props.img_side} alt={this.props.inf}/>
+        <span className={"title-"+this.props.text_side}>{this.props.inf}</span><br/>
+        <span className={"text-"+this.props.text_side}>
+          <p>{this.props.text}
+          </p>
+          <p>
+            {this.props.text2}
+          </p>
+        </span>
+      </div>
+    );
+  }
+}
 class App extends Component {
   constructor(props) {
     super(props);
+
   }
 
   render() {
@@ -30,65 +53,57 @@ class App extends Component {
         </div>
 
         <div className="info">
-          <div>
-            <img src={questions} className="image-left" alt="o que é?"/>
-            <span className="title-right">O que é?</span><br/>
-            <span className="text-right">
-            <p>
-              A smart é uma plataforma de transformação digital para pequenos e médios comerciantes locais, 
-              viabilizando que façam parcerias e vendam seus produtos para os consumidores à um custo de entrega 
-              reduzido e uma logística melhorada.
-            </p>
-            <p>
-              A nossa proposta é intermediar uma relação entre duas ou mais empresas, onde a loja vendedora terá 
-              sua loja virtual, e suas parceiras agirão como pontos de entrega, onde os consumidores poderão retirar 
-              em mãos os produtos comprados.
-            </p>
-            </span>
-          </div>
+          <Info text={`A smart é uma plataforma de transformação digital para pequenos e médios comerciantes 
+          locais, viabilizando que façam parcerias e vendam seus produtos para os consumidores à um custo de entrega 
+          reduzido e uma logística melhorada.`} 
+                text2={""}
+                inf={"O que é a smart?"}
+                img_side={"left"}
+                text_side={"right"}
+                img_src={questions}
+          ></Info>
+          <Info text={`A nossa proposta é intermediar uma relação entre duas ou mais empresas, 
+          onde a loja vendedora terá sua loja virtual, e suas parceiras agirão como pontos de entrega,
+           onde os consumidores poderão retirar em mãos os produtos comprados.`} 
+                text2={""}
+                inf={"O que fazemos?"}
+                img_side={"right"}
+                text_side={"left"}
+                img_src={agreement}
+          ></Info>
 
-          <div>
-            <img src={online_groceries} className="image-right" alt="Quem pode usar?"/>
-            <span className="title-left">Quem pode usar?</span><br/>
-            <span className="text-left">
-              <p>
-                Lojas que precisam se adaptar ao comércio virtual no mundo pós COVID-19.
-                Enfatizamos lojas locais de pequeno e médio porte, que focam no setor de varejo, 
-                visto que para essas lojas, principalmente as que vendem produtos de necessidade primária, 
-                não havia necessidade nem incentivo para se inserir no meio digital, arcar com custos de 
-                receber encomendas e entrega domiciliar.
-              </p>
-            </span>
-          </div>
+          <Info text={`Primariamente lojas de comércio local; desde lojas que simplesmente querem entrar no 
+                comercio digital, às lojas interessadas em nosso sistema de logística inovador, 
+                que descentraliza o varejo favorecendo a erradicação do Covid-19, além de reduzir os custos.`} 
+                text2={""}
+                inf={"Quem pode usar?"}
+                img_side={"left"}
+                text_side={"right"}
+                img_src={online_groceries}
+          ></Info>
 
-          <div>
-            <img src={success_factors} className="image-left" alt="Como funciona?"/>
-            <span className="title-right">Como funciona?</span><br/>
-            <span className="text-right">
-            <p>
-              O primeiro passo é cadastrar sua empresa como loja para vender seus produtos ou como ponto 
-              de entrega para receber os produtos de outra loja, ou os dois. Em seguida é possível encontrar 
-              parceiros para distribuir seus produtos na sua cidade. Os clientes pedem no aplicativo o produto 
-              de uma loja e escolhem o ponto de entrega mais próximo dele. 
-            </p>
-            </span>
-          </div>
+          <Info text={`Apos cadastrar sua loja, você poderá inserir seus produtos ou ser um ponto 
+              de entrega para atuar como ponto de distribuição de outra loja. Em seguida é possível encontrar 
+              parceiros para distribuir seus produtos na sua cidade. O cliente faz o pedido no aplicativo
+              e escolhe o ponto de entrega mais conveniente para ele.`} 
+                text2={""}
+                inf={"Como funciona?"}
+                img_side={"right"}
+                text_side={"left"}
+                img_src={success_factors}
+          ></Info>
 
-          <div>
-            <img src={heavy_box} className="image-right" alt="O cliente pediu, e agora?"/>
-            <span className="title-left">O cliente pediu, e agora?</span><br/>
-            <span className="text-left">
-              <p>
-                O produto levará um tempo para ser processado juntamente a outros pedidos da loja, depois de um 
-                tempo a loja deverá enviar os pedidos para os pontos de entregas e notificar os clientes do envio 
-                através do aplicativo.
-              </p>
-            </span>
-          </div>
+          <Info text={`A loja separa o produto e espera a hora combinada com seus parceiros. Quando a hora chegar, a loja leva 
+                todas as encomendas. O ponto de entrega confirma o recebimento e o cliente recebe uma notificação para ir buscar.`} 
+                text2={""}
+                inf={"O cliente pediu, e agora?"}
+                img_side={"left"}
+                text_side={"right"}
+                img_src={heavy_box}
+          ></Info>
+
         </div>
-
         <div className="footer"></div>
-
       </div>
     );
   }
