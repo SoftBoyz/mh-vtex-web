@@ -117,7 +117,6 @@ function TableRender(props) {
 
 async function getData(table) {
   const user = fbAuth.currentUser.uid;
-  console.log(fbAuth.currentUser.uid)
   let data = {center: false, partners: [], proposals: []}
   let cnpj;
 
@@ -166,14 +165,19 @@ async function partners(setCenter, setPartners, setProposals) {
   setCenter(!data.center);
 
   const propostas = {
-    head: ["Loja", "Proposta", "Ação"],
+    head: ["Loja", "Proposta"],
     body: proposalsArray
   }
   setProposals(propostas);
 
+  const partners = Object.values(data.partners);
+  const partnersArray = partners.map(el => {
+    return Object.values(el);
+  })
+
   const lojas_parceiras = {
-    head: ["Loja", "Ação"],
-    body: data.partners
+    head: ["Loja"],
+    body: partnersArray
   }
   setPartners(lojas_parceiras);
 }
