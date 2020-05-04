@@ -133,7 +133,7 @@ class UserProfile extends React.Component {
               </CardHeader>
               <CardBody>
                 <GridContainer>
-                  <GridItem xs={12} sm={12} md={5}>
+                  <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
                       labelText="CNPJ"
                       id="cnpj"
@@ -146,7 +146,7 @@ class UserProfile extends React.Component {
                       }}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={3}>
+                  <GridItem xs={12} sm={12} md={8}>
                     <CustomInput
                       labelText="Nome"
                       id="name"
@@ -158,8 +158,10 @@ class UserProfile extends React.Component {
                         fullWidth: true
                       }}
                     />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={4}>
+                  </GridItem>                  
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
                       labelText="Endereço"
                       id="address"
@@ -172,9 +174,7 @@ class UserProfile extends React.Component {
                       }}
                     />
                   </GridItem>
-                </GridContainer>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={6}>
+                  <GridItem xs={12} sm={12} md={2}>
                     <CustomInput
                       labelText="Número"
                       id="number"
@@ -187,7 +187,7 @@ class UserProfile extends React.Component {
                       }}
                     />
                   </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
+                  <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
                       labelText="Complemento"
                       id="complement"
