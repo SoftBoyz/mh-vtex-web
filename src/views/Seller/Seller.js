@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from "react-router-dom";
-import firebaseApi from '../../services/firebase.conf';
+import firebaseApi, { fbAuth } from '../../services/firebase.conf';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -60,6 +60,26 @@ const styles = {
   }
 };
 
+function TableRender(props) {
+  const {head, body} = props;
+  const classes = useStyles();
+  return (
+    <GridContainer>
+      <GridItem xs={12} sm={12} md={12}>
+        <Card plain className={classes.gridContainer}>
+          <CardBody>
+            <Table
+              tableHeaderColor="primary"
+              tableHead={head}
+              tableData={body}
+            />
+          </CardBody>
+        </Card>
+      </GridItem>
+    </GridContainer>
+  );
+}
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -103,12 +123,69 @@ function TableTwo() {
   return <SellerRoutes />
 }
 
+async function getData(table) {
+  let user = ''
+  await firebaseApi.auth().onAuthStateChanged(function (user) {
+    if (user) {
+      user = user.uid
+    }
+  })
+  let data = []
+  let store = {}
+  let cnpj;
+
+  var userQuery = firebaseApi.database().ref(table);
+  await userQuery.once("value", function(snapshot) {
+    snapshot.forEach(function(child) {
+      if (child.val().owner == user) {
+        store = child.val()
+        cnpj = child.key;
+      }
+    });
+  });
+  
+  var query = firebaseApi.database().ref(table);
+  await query.once("value", snapshot => {
+    snapshot.forEach(child => {
+      if (child.key != cnpj && child.val().center == true){
+        data.push({cnpj: child.key, ...child.val()});
+      }
+    });
+  })
+
+  data.splice(store, 1);
+
+  return {data, cnpj};
+}
+
+async function partners(setStores) {
+  const {data} = await getData('/stores')
+
+  const storesArray = data.map(el => {
+    const store = [el.cnpj, el.name, '']
+    return store;
+  })
+
+
+  const lojas = {
+    head: ["CNPJ", "Loja", "Ação"],
+    body: storesArray
+  }
+  setStores(lojas);
+
+}
+
 export default function SellerTabs() {
   const [value, setValue] = React.useState(0);
+  const [lojas_disponiveis, setStores] = React.useState({head: ["CNPJ", "Loja", "Ação"], body: []});
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    partners(setStores)
+  }, []);
 
   return (
     <Paper square>
@@ -122,6 +199,7 @@ export default function SellerTabs() {
         <Tab label="Pedidos" />
         <Tab label="Produtos cadastrados" />
         <Tab label="Parceiros" />
+        <Tab label="Novo ponto de entrega" />
       </Tabs>
       <TabPanel value={value} index={0}>
         <TableOne />
@@ -131,6 +209,9 @@ export default function SellerTabs() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <Maps />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <TableRender head={lojas_disponiveis.head} body={lojas_disponiveis.body} />
       </TabPanel>
     </Paper>
   );
