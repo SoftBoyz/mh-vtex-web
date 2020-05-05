@@ -23,7 +23,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import Maps from "../Maps/Maps";
 
-import {pedidos} from 'components/User.js';
+import User from 'components/User.js';
 import OrderLists from 'components/user/OrderList';
 import SellerRoutes from 'views/Seller/SellerRoutes'
 
@@ -123,14 +123,6 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles(styles);
-
-function TableOne() {
-  return <OrderLists orders={pedidos} />;
-}
-
-function TableTwo() {
-  return <SellerRoutes />
-}
 
 async function addCenter(cnpjStore, cnpjCenter, setStores, setPartners) {
   var center = {}
@@ -267,13 +259,12 @@ export default function SellerTabs() {
         <Tab label="Parceiros Elegíveis" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <TableOne />
+        <User />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TableTwo />
+        <SellerRoutes />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {/* <Maps /> */}
         <TableRender head={parceiros.head} body={parceiros.body} button={true} setValue={setValue} />
       </TabPanel>
       <TabPanel value={value} index={3}>

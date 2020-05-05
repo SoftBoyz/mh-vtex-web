@@ -76,7 +76,6 @@ class Register extends React.Component {
     
     data = JSON.parse(JSON.stringify(this.state));
     await fbAuth.signInWithEmailAndPassword(data.email, data.password)
-    // console.log(fbAuth)
     data.owner = fbAuth.currentUser.uid
 
     delete data.cnpj;

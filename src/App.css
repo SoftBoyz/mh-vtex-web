@@ -199,6 +199,9 @@ body {
 
 .footer {
   position: relative;
+  text-align: center;
+  padding-top: 30px;
+  color: #fff;
   background: rgb(83, 109, 254);
   background: linear-gradient(
     245deg,
@@ -206,7 +209,7 @@ body {
     rgba(15, 25, 121, 1) 100%
   );
   width: 100vw;
-  height: 200px;
-  margin-top: 200px;
+  height: 50px;
+  margin-top: 100px;
   bottom: 0;
 }
