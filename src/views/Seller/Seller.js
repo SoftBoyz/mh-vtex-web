@@ -23,7 +23,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import Maps from "../Maps/Maps";
 
-import {pedidos} from 'components/User.js';
+import User from 'components/User.js';
 import OrderLists from 'components/user/OrderList';
 import SellerRoutes from 'views/Seller/SellerRoutes'
 
@@ -125,7 +125,7 @@ function a11yProps(index) {
 const useStyles = makeStyles(styles);
 
 function TableOne() {
-  return <OrderLists orders={pedidos} />;
+  return <User />;
 }
 
 function TableTwo() {

@@ -65,9 +65,9 @@ export default function AdminNavbarLinks() {
             className: classes.margin + " " + classes.search
           }}
           inputProps={{
-            placeholder: "Search",
+            placeholder: "Pesquisar",
             inputProps: {
-              "aria-label": "Search"
+              "aria-label": "Pesquisar"
             }
           }}
         />
@@ -132,31 +132,31 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      Mike John responded to your email
+                      Novo pedido recebido!
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      You have 5 new tasks
+                      Pedidos entregues ao ponto de entrega Loja2
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      You{"'"}re now friend with Andrew
+                      Pedidos entregues ao ponto de entrega Loja1
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      Another Notification
+                      Os clientes retiraram os pedidos
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      Another One
+                      Pedidos entregues ao ponto de entrega Loja2
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
@@ -177,7 +177,7 @@ export default function AdminNavbarLinks() {
         >
           <Person className={classes.icons} />
           <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Profile</p>
+            <p className={classes.linkText}>Perfil</p>
           </Hidden>
         </Button>
         <Poppers
@@ -220,7 +220,7 @@ export default function AdminNavbarLinks() {
                       onClick={handleLogout}
                       className={classes.dropdownItem}
                     >
-                      Logout
+                      Sair
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
