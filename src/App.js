@@ -112,13 +112,13 @@ class App extends Component {
         <div className="video">
           <span className="title">Video explicativo</span>
           <iframe
-            src="https://www.youtube.com/embed/KBcjxWn7oYc"
+            src="https://www.youtube.com/embed/QAwiCX4fNi8?controls=0"
             frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
         </div>
-        <div className="footer"></div>
+        <div className="footer">© 2020 SoftBoys</div>
       </div>
     );
   }

@@ -124,14 +124,6 @@ function a11yProps(index) {
 
 const useStyles = makeStyles(styles);
 
-function TableOne() {
-  return <User />;
-}
-
-function TableTwo() {
-  return <SellerRoutes />
-}
-
 async function addCenter(cnpjStore, cnpjCenter, setStores, setPartners) {
   var center = {}
   cnpjStore = cnpjStore.replace(/\D/g, '')
@@ -267,13 +259,12 @@ export default function SellerTabs() {
         <Tab label="Parceiros Elegíveis" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <TableOne />
+        <User />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TableTwo />
+        <SellerRoutes />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {/* <Maps /> */}
         <TableRender head={parceiros.head} body={parceiros.body} button={true} setValue={setValue} />
       </TabPanel>
       <TabPanel value={value} index={3}>
