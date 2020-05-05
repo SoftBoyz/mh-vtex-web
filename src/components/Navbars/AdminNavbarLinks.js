@@ -21,6 +21,8 @@ import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 
+import firebaseApi from "../../services/firebase.conf";
+
 const useStyles = makeStyles(styles);
 
 export default function AdminNavbarLinks() {
@@ -47,6 +49,14 @@ export default function AdminNavbarLinks() {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+  const handleLogout = () => {
+    firebaseApi.auth().signOut().then(function() {
+      window.location.replace("/");
+    }).catch(function(error) {
+      alert(error)
+    });
+    
+  }
   return (
     <div>
       <div className={classes.searchWrapper}>
@@ -55,9 +65,9 @@ export default function AdminNavbarLinks() {
             className: classes.margin + " " + classes.search
           }}
           inputProps={{
-            placeholder: "Search",
+            placeholder: "Pesquisar",
             inputProps: {
-              "aria-label": "Search"
+              "aria-label": "Pesquisar"
             }
           }}
         />
@@ -65,7 +75,7 @@ export default function AdminNavbarLinks() {
           <Search />
         </Button>
       </div>
-      <Button
+      {/* <Button
         color={window.innerWidth > 959 ? "transparent" : "white"}
         justIcon={window.innerWidth > 959}
         simple={!(window.innerWidth > 959)}
@@ -76,7 +86,7 @@ export default function AdminNavbarLinks() {
         <Hidden mdUp implementation="css">
           <p className={classes.linkText}>Dashboard</p>
         </Hidden>
-      </Button>
+      </Button> */}
       <div className={classes.manager}>
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
@@ -122,31 +132,31 @@ export default function AdminNavbarLinks() {
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      Mike John responded to your email
+                      Novo pedido recebido!
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      You have 5 new tasks
+                      Pedidos entregues ao ponto de entrega Loja2
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      You{"'"}re now friend with Andrew
+                      Pedidos entregues ao ponto de entrega Loja1
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      Another Notification
+                      Os clientes retiraram os pedidos
                     </MenuItem>
                     <MenuItem
                       onClick={handleCloseNotification}
                       className={classes.dropdownItem}
                     >
-                      Another One
+                      Pedidos entregues ao ponto de entrega Loja2
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
@@ -167,7 +177,7 @@ export default function AdminNavbarLinks() {
         >
           <Person className={classes.icons} />
           <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Profile</p>
+            <p className={classes.linkText}>Perfil</p>
           </Hidden>
         </Button>
         <Poppers
@@ -194,23 +204,23 @@ export default function AdminNavbarLinks() {
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={() => window.location.replace("/admin/user")}
                       className={classes.dropdownItem}
                     >
                       Profile
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Settings
-                    </MenuItem>
+                    </MenuItem> */}
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={handleLogout}
                       className={classes.dropdownItem}
                     >
-                      Logout
+                      Sair
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>

@@ -10,14 +10,14 @@ import Login from "./components/Login";
 import Admin from "layouts/Admin.js";
 import RTL from "layouts/RTL.js";
 import LoginTab from "views/Login";
-import UserProvider from "providers/UserProvider";
+import { AuthProvider } from "providers/UserProvider";
 
 import "assets/css/material-dashboard-react.css?v=1.8.0";
 
 const hist = createBrowserHistory();
 
 ReactDOM.render(
-  <UserProvider>
+  <AuthProvider>
     <Router history={hist}>
       <Switch>
         <Route path="/admin" component={Admin} />
@@ -60,6 +60,6 @@ ReactDOM.render(
         <Redirect from="/" to="/admin/dashboard" />
       </Switch>
     </Router>
-  </UserProvider>,
+  </AuthProvider>,
   document.getElementById("root")
 );

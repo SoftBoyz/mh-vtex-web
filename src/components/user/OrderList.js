@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,7 +12,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Checkbox from '@material-ui/core/Checkbox';
 import ControlCameraIcon from '@material-ui/icons/ControlCamera';
 import LocalShippingRoundedIcon from '@material-ui/icons/LocalShippingRounded';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,54 +78,47 @@ class Order extends React.Component {
   render() {
     return (
       <div>
-      
-      <ListItem button onClick={this.handleClick}>
-        <ListItemIcon>
-          {this.state.allChecked ? <LocalShippingRoundedIcon /> : <CallReceivedIcon />}
-        </ListItemIcon>
+        <ListItem button onClick={this.handleClick}>
+          <ListItemIcon>
+            {this.state.allChecked ? <LocalShippingRoundedIcon /> : <CallReceivedIcon />}
+          </ListItemIcon>
 
-        <ListItemText primary={"Pedido "+ this.props.pedido.id} secondary={"Total: R$ " + this.props.pedido.total.toFixed(2).toString() + " (" + this.props.pedido.status+ ")" } />
-        {this.state.open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      
-      {
-        this.props.pedido.cart.map((product, i) => {
+          <ListItemText primary={"Pedido"} secondary={"Total: R$ " + this.props.pedido.total.toFixed(2).toString() + " (" + this.props.pedido.status+ ")" } />
+          {this.state.open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
           
-          return(
-            <Collapse key={i} in={this.state.open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-              
-                <ListItem 
-                  button 
-                  className={this.props.st.nested} >
-                  
-                  <ListItemIcon>
-                    <ControlCameraIcon 
-                    onClick={() => {
-                      alert("redirect to product page");
-                      // todo: redirect to product page
-                    }} 
-                    />
-                  </ListItemIcon>
+        {
+          this.props.pedido.cart.map((product, i) => {
+            return(
+              <Collapse key={i} in={this.state.open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
                 
-                  <ListItemText primary={product.item.name} secondary={"R$ " + product.item.price.toFixed(2).toString() + " (Qnt: " + product.qnt.toString()+")"}/>
+                  <ListItem 
+                    button 
+                    className={this.props.st.nested} >
+                    
+                    <ListItemIcon>
+                      <ControlCameraIcon />
+                    </ListItemIcon>
                   
-                  <ListItemSecondaryAction>
-                    <Checkbox
-                      onClick={() => this.handleToggle(i)} 
-                      color="primary"
-                      edge="end"
-                      checked={this.state.checked[i]}
-                    />
-                  </ListItemSecondaryAction>
+                    <ListItemText primary={product.item.name} secondary={"R$ " + product.item.price.toFixed(2).toString() + " (Qnt: " + product.item.qnt.toString()+")"}/>
+                    
+                    <ListItemSecondaryAction>
+                      <Checkbox
+                        onClick={() => this.handleToggle(i)} 
+                        color="primary"
+                        edge="end"
+                        checked={this.state.checked[i]}
+                      />
+                    </ListItemSecondaryAction>
 
-                </ListItem>
-              </List>
-            </Collapse>  
-          );
-        })
-      }
- 
+                  </ListItem>
+                </List>
+              </Collapse>  
+            );
+          })
+        }
+
       </div>
     );
   }

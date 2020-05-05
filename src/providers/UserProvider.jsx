@@ -1,23 +1,30 @@
-import React, { Component, createContext } from "react";
+import React, { useEffect, useState } from "react";
 import { fbAuth } from "../services/firebase.conf";
 
-export const UserContext = createContext({ user: null });
-class UserProvider extends Component {
-  state = {
-    user: null
-  };
+export const AuthContext = React.createContext();
 
-  componentDidMount = () => {
-    fbAuth.onAuthStateChanged(userAuth => {
-      this.setState({ user: userAuth});
+export const AuthProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [pending, setPending] = useState(true);
+
+  useEffect(() => {
+    fbAuth.onAuthStateChanged((user) => {
+      setCurrentUser(user)
+      setPending(false)
     });
-  };
-  render() {
-    return (
-      <UserContext.Provider value={this.state.user}>
-        {this.props.children}
-      </UserContext.Provider>
-    );
+  }, []);
+
+  if(pending){
+    return <>Loading...</>
   }
-}
-export default UserProvider;
+
+  return (
+    <AuthContext.Provider
+      value={{
+        currentUser
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
