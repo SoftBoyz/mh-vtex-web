@@ -1,3 +1,9 @@
+Instruções
+```
+npm install
+npm start
+```
+
 ### Shawee - Mega Hack 2020
 
 ##### Contexto

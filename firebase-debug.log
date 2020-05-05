@@ -1,0 +1,21 @@
+[debug] [2020-05-05T00:47:36.527Z] ----------------------------------------------------------------------
+[debug] [2020-05-05T00:47:36.528Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2020-05-05T00:47:36.529Z] CLI Version:   8.2.0
+[debug] [2020-05-05T00:47:36.529Z] Platform:      win32
+[debug] [2020-05-05T00:47:36.529Z] Node Version:  v12.14.1
+[debug] [2020-05-05T00:47:36.529Z] Time:          Mon May 04 2020 21:47:36 GMT-0300 (GMT-03:00)
+[debug] [2020-05-05T00:47:36.529Z] ----------------------------------------------------------------------
+[debug] [2020-05-05T00:47:36.529Z] 
+[debug] [2020-05-05T00:47:36.536Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-05-05T00:47:36.536Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Lucas\Desktop\megahack\dev\mh-vtex-web
+
