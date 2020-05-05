@@ -73,8 +73,13 @@ class AddProduct extends React.Component {
 
   handleChange(e) {
     let data = e.target.value;
+
+    if (e.target.id === "preco") {
+      this.setState({ preco: mask.moneyMask(data) });
+    }else{
+      this.setState({ [e.target.id]: data });
+    }
     
-    this.setState({ [e.target.id]: data });
 
   }
 
@@ -149,7 +154,6 @@ class AddProduct extends React.Component {
                         value: preco,
                         error: error.preco,
                         required: true,
-                        type: 'number'
                       }}
                       formControlProps={{
                         fullWidth: true
